@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fff8e7" />
+    <meta
+      name="description"
+      content="面向三年级孩子的混合运算互动练习，通过找顺序、拆步骤、读故事和做变式理解算式结构。"
+    />
+    <title>算术星球 · 看懂算式再计算</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到练习区</a>
+
+    <div class="sky" aria-hidden="true">
+      <span class="star star-one"></span>
+      <span class="star star-two"></span>
+      <span class="star star-three"></span>
+      <span class="orbit-dot"></span>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="算术星球首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <circle cx="32" cy="31" r="18" fill="#7767e9" />
+            <path d="M14 29c-8 4-11 9-8 13 5 7 28 3 43-5 9-5 12-10 9-13-2-3-7-3-13-1" fill="none" stroke="#ffb934" stroke-width="6" stroke-linecap="round" />
+            <circle cx="25" cy="25" r="3" fill="#bdb5ff" />
+          </svg>
+        </span>
+        <span>算术星球</span>
+      </a>
+
+      <div class="top-actions">
+        <button class="icon-button" id="soundButton" type="button" aria-label="关闭语音讲解" aria-pressed="true" title="语音讲解已开启">
+          <svg class="sound-on" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 5 6 9H3v6h3l5 4V5Zm4.5 3.5a5 5 0 0 1 0 7M18 6a8 8 0 0 1 0 12" />
+          </svg>
+          <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 5 6 9H3v6h3l5 4V5Zm4 5 5 5m0-5-5 5" />
+          </svg>
+        </button>
+        <div class="stat-chip" aria-label="获得的星星">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.9-5.4 2.9 1-6-4.4-4.3 6.1-.9L12 2.8Z" /></svg>
+          <strong id="starCount">0</strong>
+        </div>
+        <div class="avatar" aria-label="学习者头像">小</div>
+      </div>
+    </header>
+
+    <main id="main" class="app-shell">
+      <section class="welcome-panel" aria-labelledby="welcomeTitle">
+        <div class="welcome-copy">
+          <p class="eyebrow">今日探险任务</p>
+          <h1 id="welcomeTitle">先看懂，再动笔！</h1>
+          <p>别急着算答案，先找出藏在算式里的“小队”。</p>
+          <div class="streak-pill">
+            <span class="streak-flame" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M13.4 2.4c.8 3.6-.8 5.2-2.3 6.7-1.2-1.2-1.5-2.6-1.4-3.8C6.8 7.5 5 10.1 5 13a7 7 0 0 0 14 0c0-4.2-2.6-7.7-5.6-10.6ZM12 18.5a3.2 3.2 0 0 1-3.2-3.2c0-1.2.6-2.3 1.5-3.2.2 1 .8 1.8 1.6 2.3 1.1-1 1.6-2.1 1.5-3.6 1.2 1.1 1.8 2.6 1.8 4.5a3.2 3.2 0 0 1-3.2 3.2Z" /></svg>
+            </span>
+            连续答对 <strong id="streakCount">0</strong> 题
+          </div>
+        </div>
+
+        <div class="mascot-wrap" aria-label="一只正在思考的星球小助手" role="img">
+          <div class="thought-bubble">先算哪一块？</div>
+          <svg class="mascot" viewBox="0 0 230 190" aria-hidden="true">
+            <ellipse cx="114" cy="168" rx="68" ry="12" fill="#5e54a4" opacity=".13" />
+            <path d="M77 52c-9-17 0-32 10-39M153 52c9-17 0-32-10-39" fill="none" stroke="#302b63" stroke-width="7" stroke-linecap="round" />
+            <circle cx="86" cy="14" r="7" fill="#ffb934" stroke="#302b63" stroke-width="4" />
+            <circle cx="142" cy="14" r="7" fill="#ffb934" stroke="#302b63" stroke-width="4" />
+            <rect x="47" y="42" width="135" height="112" rx="49" fill="#8e7cf4" stroke="#302b63" stroke-width="6" />
+            <path d="M45 92C24 79 13 88 13 102c0 13 14 18 32 6M184 92c21-13 32-4 32 10 0 13-14 18-32 6" fill="#ffb934" stroke="#302b63" stroke-width="6" stroke-linecap="round" />
+            <circle cx="86" cy="91" r="7" fill="#302b63" />
+            <circle cx="144" cy="91" r="7" fill="#302b63" />
+            <circle cx="84" cy="88" r="2" fill="#fff" />
+            <circle cx="142" cy="88" r="2" fill="#fff" />
+            <path d="M99 116c9 9 23 9 32 0" fill="none" stroke="#302b63" stroke-width="5" stroke-linecap="round" />
+            <circle cx="66" cy="111" r="7" fill="#ff91b8" opacity=".65" />
+            <circle cx="163" cy="111" r="7" fill="#ff91b8" opacity=".65" />
+            <path d="M82 154v18M147 154v18" stroke="#302b63" stroke-width="7" stroke-linecap="round" />
+          </svg>
+        </div>
+      </section>
+
+      <section class="mission-section" aria-labelledby="missionTitle">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">选择训练方式</p>
+            <h2 id="missionTitle">今天从哪里出发？</h2>
+          </div>
+          <p class="section-note">每题都要说出“为什么”</p>
+        </div>
+
+        <div class="mission-grid" id="missionGrid">
+          <button class="mission-card active" type="button" data-mode="order" aria-pressed="true">
+            <span class="mission-icon purple" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M7 9h18M7 16h11M7 23h7" /><path d="m22 20 3 3 5-7" /></svg>
+            </span>
+            <span class="mission-copy">
+              <strong>找第一步</strong>
+              <small>圈出最先计算的部分</small>
+            </span>
+            <span class="mission-badge">入门</span>
+          </button>
+
+          <button class="mission-card" type="button" data-mode="calculate" aria-pressed="false">
+            <span class="mission-icon orange" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><rect x="5" y="4" width="22" height="24" rx="4" /><path d="M10 10h12M11 17h2m6 0h2m-10 6h2m6 0h2" /></svg>
+            </span>
+            <span class="mission-copy">
+              <strong>拆开算</strong>
+              <small>一步一步完成计算</small>
+            </span>
+            <span class="mission-badge">熟练</span>
+          </button>
+
+          <button class="mission-card" type="button" data-mode="story" aria-pressed="false">
+            <span class="mission-icon green" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M5 7.5c5-2 8-1 11 2v18c-3-3-6-4-11-2v-18Zm22 0c-5-2-8-1-11 2v18c3-3 6-4 11-2v-18Z" /></svg>
+            </span>
+            <span class="mission-copy">
+              <strong>故事侦探</strong>
+              <small>把生活故事变成算式</small>
+            </span>
+            <span class="mission-badge">理解</span>
+          </button>
+
+          <button class="mission-card" type="button" data-mode="transfer" aria-pressed="false">
+            <span class="mission-icon pink" aria-hidden="true">
+              <svg viewBox="0 0 32 32"><path d="M7 8h18M7 16h18M7 24h18" /><circle cx="12" cy="8" r="3" /><circle cx="21" cy="16" r="3" /><circle cx="15" cy="24" r="3" /></svg>
+            </span>
+            <span class="mission-copy">
+              <strong>变式挑战</strong>
+              <small>找出变化与不变</small>
+            </span>
+            <span class="mission-badge">进阶</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="practice-card" id="practiceCard" aria-labelledby="practiceTitle">
+        <div class="practice-topline">
+          <div class="level-control" role="group" aria-label="题目难度">
+            <button type="button" class="level-button active" data-level="1" aria-pressed="true">基础</button>
+            <button type="button" class="level-button" data-level="2" aria-pressed="false">混合</button>
+            <button type="button" class="level-button" data-level="3" aria-pressed="false">挑战</button>
+          </div>
+          <div class="question-progress" aria-label="本轮进度">
+            <span id="questionNumber">第 1 题</span>
+            <div class="progress-track"><span id="progressFill"></span></div>
+          </div>
+        </div>
+
+        <div class="question-area">
+          <div class="guide-row">
+            <span class="guide-avatar" aria-hidden="true">?</span>
+            <div>
+              <p class="eyebrow" id="modeLabel">观察任务</p>
+              <h2 id="practiceTitle" tabindex="-1">哪一部分应该先算？</h2>
+            </div>
+          </div>
+
+          <div id="promptArea" class="prompt-area"></div>
+          <div id="answerArea" class="answer-area" role="group" aria-label="答案选项"></div>
+
+          <div class="feedback" id="feedback" aria-live="polite">
+            <span class="feedback-icon" aria-hidden="true"></span>
+            <div>
+              <strong id="feedbackTitle"></strong>
+              <p id="feedbackText"></p>
+            </div>
+          </div>
+
+          <div class="practice-actions">
+            <button class="hint-button" id="hintButton" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4m5-10a7 7 0 1 0-11 5.7V17h8v-.3A7 7 0 0 0 19 11Z" /></svg>
+              给我一点提示
+            </button>
+            <button class="next-button" id="nextButton" type="button" disabled>
+              <span id="nextButtonLabel">下一题</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="rule-strip" aria-label="运算顺序小口诀">
+        <div class="rule-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M16 3 4 9v9c0 7 5 10 12 12 7-2 12-5 12-12V9L16 3Z" /><path d="m10 17 4 4 8-9" /></svg>
+        </div>
+        <div>
+          <p class="eyebrow">星球小口诀</p>
+          <strong>有括号先算括号；没有括号，先乘除、后加减；同一级，从左往右。</strong>
+        </div>
+      </section>
+    </main>
+
+    <div class="celebration" id="celebration" aria-hidden="true"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
