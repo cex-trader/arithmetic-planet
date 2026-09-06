@@ -119,6 +119,31 @@ button:focus-visible, a:focus-visible {
 
 .top-actions { display: flex; align-items: center; gap: 12px; }
 
+.page-nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .78);
+}
+.page-nav-link {
+  display: grid;
+  min-width: 68px;
+  min-height: 44px;
+  place-items: center;
+  padding: 7px 14px;
+  border-radius: 11px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+  transition: color var(--fast), background var(--fast), box-shadow var(--fast);
+}
+.page-nav-link:hover { color: var(--primary-dark); background: var(--primary-soft); }
+.page-nav-link.active { color: #fff; background: var(--primary); box-shadow: 0 3px 0 var(--primary-dark); }
+
 .icon-button,
 .stat-chip,
 .avatar {
@@ -360,8 +385,11 @@ button:focus-visible, a:focus-visible {
   .topbar, .app-shell { width: min(100% - 24px, 1120px); }
   .topbar { min-height: 70px; }
   .brand { font-size: 18px; }
+  .brand span:last-child { display: none; }
   .brand-mark { width: 39px; height: 39px; }
   .avatar { display: none; }
+  .page-nav { gap: 3px; padding: 4px; }
+  .page-nav-link { min-width: 54px; min-height: 44px; padding: 7px 10px; }
   .icon-button, .stat-chip { height: 46px; min-width: 46px; border-radius: 14px; }
   .welcome-panel { display: block; min-height: auto; border-radius: 29px; }
   .welcome-copy { padding: 25px 20px; text-align: center; }
@@ -405,7 +433,8 @@ button:focus-visible, a:focus-visible {
 }
 
 @media (max-width: 390px) {
-  .brand span:last-child { display: none; }
+  .top-actions { gap: 7px; }
+  .stat-chip { min-width: 64px; padding-inline: 9px; }
   .welcome-copy { padding-inline: 20px; }
   .welcome-copy h1 { font-size: 31px; }
   .story-prompt { padding: 19px; font-size: 17px; }

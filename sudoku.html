@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fff8e7" />
+    <meta name="description" content="适合小学三年级孩子的九宫格数独游戏，包含教学、容易、中等和困难模式。" />
+    <title>数独探险 · 算术星球</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="sudoku.css" />
+  </head>
+  <body class="sudoku-page">
+    <a class="skip-link" href="#sudokuMain">跳到数独棋盘</a>
+
+    <div class="sky" aria-hidden="true">
+      <span class="star star-one"></span>
+      <span class="star star-two"></span>
+      <span class="star star-three"></span>
+      <span class="orbit-dot"></span>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="算术星球首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="31" r="18" fill="#7767e9" />
+            <path d="M14 29c-8 4-11 9-8 13 5 7 28 3 43-5 9-5 12-10 9-13-2-3-7-3-13-1" fill="none" stroke="#ffb934" stroke-width="6" stroke-linecap="round" />
+            <circle cx="25" cy="25" r="3" fill="#bdb5ff" />
+          </svg>
+        </span>
+        <span>算术星球</span>
+      </a>
+
+      <nav class="page-nav" aria-label="学习项目">
+        <a class="page-nav-link" href="index.html">算术</a>
+        <a class="page-nav-link active" href="sudoku.html" aria-current="page">数独</a>
+      </nav>
+
+      <div class="top-actions">
+        <div class="stat-chip" aria-label="获得的星星">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.9-5.4 2.9 1-6-4.4-4.3 6.1-.9L12 2.8Z" /></svg>
+          <strong id="starCount">0</strong>
+        </div>
+        <div class="avatar" aria-label="学习者头像">小</div>
+      </div>
+    </header>
+
+    <main id="sudokuMain" class="sudoku-shell">
+      <section class="sudoku-hero" aria-labelledby="sudokuTitle">
+        <div>
+          <p class="eyebrow">逻辑推理训练</p>
+          <h1 id="sudokuTitle">九宫格数独探险</h1>
+          <p>不用计算加减法，只要认真观察、排除和推理。</p>
+        </div>
+        <div class="mini-grid" aria-hidden="true">
+          <span>5</span><span></span><span>8</span>
+          <span></span><span>3</span><span></span>
+          <span>2</span><span></span><span>6</span>
+        </div>
+      </section>
+
+      <section class="lesson-card" aria-labelledby="lessonTitle">
+        <div class="lesson-heading">
+          <span class="lesson-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M5 7.5c5-2 8-1 11 2v18c-3-3-6-4-11-2v-18Zm22 0c-5-2-8-1-11 2v18c3-3 6-4 11-2v-18Z" /></svg>
+          </span>
+          <div>
+            <p class="eyebrow">一分钟学规则</p>
+            <h2 id="lessonTitle">每个数字都有三个约定</h2>
+          </div>
+        </div>
+        <div class="rule-grid">
+          <div><strong>看一行</strong><span>横着的每一行，1～9不能重复。</span></div>
+          <div><strong>看一列</strong><span>竖着的每一列，1～9不能重复。</span></div>
+          <div><strong>看小宫格</strong><span>每个粗线框里的九格，1～9不能重复。</span></div>
+        </div>
+        <p class="lesson-tip"><strong>思考口诀：</strong>先找空格，再看行、列、小宫格，排除已经出现的数字。</p>
+      </section>
+
+      <section class="sudoku-game" aria-labelledby="gameTitle">
+        <div class="game-toolbar">
+          <div>
+            <p class="eyebrow">选择难度</p>
+            <h2 id="gameTitle">开始今天的数独</h2>
+          </div>
+          <div class="difficulty-tabs" role="group" aria-label="数独难度">
+            <button class="difficulty-button active" type="button" data-level="teaching" aria-pressed="true">教学</button>
+            <button class="difficulty-button" type="button" data-level="easy" aria-pressed="false">容易</button>
+            <button class="difficulty-button" type="button" data-level="medium" aria-pressed="false">中等</button>
+            <button class="difficulty-button" type="button" data-level="hard" aria-pressed="false">困难</button>
+          </div>
+        </div>
+
+        <div class="game-layout">
+          <div class="board-column">
+            <div id="sudokuBoard" class="sudoku-board" role="grid" aria-label="九宫格数独棋盘"></div>
+            <p class="board-caption">深色数字是题目，紫色数字是你填入的答案。</p>
+          </div>
+
+          <aside class="game-panel" aria-label="数独操作和提示">
+            <div class="coach-card" id="coachCard">
+              <div class="coach-head">
+                <span class="coach-mark" aria-hidden="true">?</span>
+                <div>
+                  <p class="eyebrow">推理小助手</p>
+                  <strong id="coachTitle">先选一个空格</strong>
+                </div>
+              </div>
+              <p id="coachText">点击棋盘上的空格，我会陪你一起观察。</p>
+            </div>
+
+            <div class="number-pad" id="numberPad" aria-label="数字键盘"></div>
+
+            <div class="tool-row">
+              <button class="tool-button" id="eraseButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 15 8-9 8 7-7 8H8l-4-4a1.4 1.4 0 0 1 0-2Z" /><path d="m9 11 7 7" /></svg>
+                擦除
+              </button>
+              <button class="tool-button hint-tool" id="sudokuHintButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4m5-10a7 7 0 1 0-11 5.7V17h8v-.3A7 7 0 0 0 19 11Z" /></svg>
+                填一格提示
+              </button>
+            </div>
+
+            <div class="game-stats" aria-label="当前进度">
+              <div><span>已完成</span><strong id="filledCount">0 / 81</strong></div>
+              <div><span>使用提示</span><strong id="hintCount">0</strong></div>
+            </div>
+
+            <button class="new-game-button" id="newGameButton" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5" /><path d="M6.1 9A7 7 0 0 1 18 6l2 3M17.9 15A7 7 0 0 1 6 18l-2-3" /></svg>
+              换一道新题
+            </button>
+          </aside>
+        </div>
+        <div id="gameAnnouncement" class="sr-only" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <dialog class="complete-dialog" id="completeDialog" aria-labelledby="completeTitle">
+      <div class="dialog-badge" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="m16 3 3.5 7.1 7.9 1.2-5.7 5.5 1.3 7.9-7-3.7-7 3.7 1.3-7.9-5.7-5.5 7.9-1.2L16 3Z" /></svg>
+      </div>
+      <p class="eyebrow">挑战完成</p>
+      <h2 id="completeTitle">九宫格全部点亮！</h2>
+      <p id="completeText"></p>
+      <div class="dialog-actions">
+        <button type="button" id="closeDialogButton">看看棋盘</button>
+        <button type="button" class="primary" id="dialogNewGameButton">再来一题</button>
+      </div>
+    </dialog>
+
+    <script src="sudoku.js"></script>
+  </body>
+</html>

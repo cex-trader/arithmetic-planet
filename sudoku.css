@@ -1,0 +1,146 @@
+.sudoku-shell { width: min(1120px, calc(100% - 40px)); margin: 20px auto 80px; }
+
+.sudoku-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 178px;
+  padding: 30px 42px;
+  overflow: hidden;
+  border: 3px solid var(--ink);
+  border-radius: 32px;
+  background: linear-gradient(135deg, #fff 0%, #efedff 100%);
+  box-shadow: var(--shadow);
+}
+.sudoku-hero h1 { margin: 0 0 8px; font-size: clamp(33px, 5vw, 50px); line-height: 1.12; letter-spacing: -.035em; }
+.sudoku-hero p:last-child { margin: 0; color: var(--ink-soft); font-weight: 700; }
+.mini-grid { display: grid; flex: 0 0 auto; width: 118px; height: 118px; grid-template-columns: repeat(3, 1fr); overflow: hidden; border: 4px solid var(--ink); border-radius: 19px; background: #fff; box-shadow: 0 6px 0 #cfc9ed; transform: rotate(4deg); }
+.mini-grid span { display: grid; place-items: center; border-right: 2px solid var(--line); border-bottom: 2px solid var(--line); color: var(--primary-dark); font-size: 20px; font-weight: 900; }
+.mini-grid span:nth-child(3n) { border-right: 0; }
+.mini-grid span:nth-child(n+7) { border-bottom: 0; }
+
+.lesson-card { margin-top: 34px; padding: 25px 28px; border: 2px solid #e4c45e; border-radius: 24px; background: #fff7d5; box-shadow: 0 6px 0 #e4c766; }
+.lesson-heading { display: flex; align-items: center; gap: 13px; }
+.lesson-heading h2 { margin: 0; font-size: 24px; }
+.lesson-icon { display: grid; flex: 0 0 auto; width: 50px; height: 50px; place-items: center; border-radius: 16px; color: #8a6111; background: #fff; }
+.lesson-icon svg { width: 29px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.rule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 19px; }
+.rule-grid div { display: flex; min-height: 76px; flex-direction: column; padding: 13px 16px; border: 2px solid #edd98f; border-radius: 16px; background: rgba(255,255,255,.72); }
+.rule-grid strong { color: #68480c; }
+.rule-grid span { margin-top: 2px; color: #64583c; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 14px; }
+.lesson-tip { margin: 17px 2px 0; color: #574a2d; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+
+.sudoku-game { margin-top: 40px; padding: 28px; border: 3px solid var(--ink); border-radius: 32px; background: #fff; box-shadow: var(--shadow); }
+.game-toolbar { display: flex; align-items: end; justify-content: space-between; gap: 20px; padding-bottom: 22px; border-bottom: 2px solid #ece8f4; }
+.game-toolbar h2 { margin: 0; font-size: 28px; }
+.difficulty-tabs { display: flex; gap: 5px; padding: 5px; border-radius: 15px; background: #ebe8f5; }
+.difficulty-button { min-width: 68px; min-height: 44px; padding: 7px 12px; border: 0; border-radius: 11px; background: transparent; color: var(--ink-soft); font-size: 14px; font-weight: 900; transition: background var(--fast), color var(--fast), box-shadow var(--fast); }
+.difficulty-button.active { color: #fff; background: var(--primary); box-shadow: 0 3px 0 var(--primary-dark); }
+.game-layout { display: grid; grid-template-columns: minmax(430px, 570px) minmax(260px, 1fr); align-items: start; justify-content: center; gap: clamp(28px, 5vw, 58px); padding-top: 28px; }
+.board-column { min-width: 0; }
+.sudoku-board { display: grid; width: min(100%, 570px); aspect-ratio: 1; grid-template-columns: repeat(9, 1fr); overflow: hidden; border: 4px solid var(--ink); border-radius: 13px; background: var(--ink); box-shadow: 0 7px 0 #cbc5df; }
+.sudoku-cell { position: relative; display: grid; min-width: 0; min-height: 0; place-items: center; padding: 0; border: 0; border-right: 1px solid #c8c3d7; border-bottom: 1px solid #c8c3d7; border-radius: 0; background: #fff; color: var(--primary-dark); font-size: clamp(20px, 3.3vw, 31px); font-weight: 900; font-variant-numeric: tabular-nums; transition: background 140ms ease-out, color 140ms ease-out, box-shadow 140ms ease-out; }
+.sudoku-cell.box-right { border-right: 4px solid var(--ink); }
+.sudoku-cell.box-bottom { border-bottom: 4px solid var(--ink); }
+.sudoku-cell.last-column { border-right: 0; }
+.sudoku-cell.last-row { border-bottom: 0; }
+.sudoku-cell.fixed { color: var(--ink); background: #fffdf6; }
+.sudoku-cell.related { background: #f0edff; }
+.sudoku-cell.same-number { color: #4532bd; background: #ddd7ff; }
+.sudoku-cell.selected { z-index: 2; color: #fff; background: var(--primary); box-shadow: inset 0 0 0 4px #392e8d; }
+.sudoku-cell.hinted:not(.selected) { color: #176a4c; background: var(--green-soft); }
+.sudoku-cell.wrong { color: #fff; background: var(--red); animation: sudoku-shake 240ms ease-out; }
+.sudoku-cell:focus-visible { z-index: 3; outline: 4px solid #2176e5; outline-offset: -4px; }
+.board-caption { margin: 17px 0 0; color: var(--ink-soft); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 13px; text-align: center; }
+
+.game-panel { display: grid; gap: 18px; }
+.coach-card { min-height: 132px; padding: 18px; border: 2px solid #b8afea; border-radius: 20px; background: #f6f4ff; }
+.coach-card.success { border-color: #80c7ac; background: #effbf5; }
+.coach-card.warning { border-color: #e5a1af; background: #fff3f5; }
+.coach-head { display: flex; align-items: center; gap: 11px; }
+.coach-mark { display: grid; flex: 0 0 auto; width: 42px; height: 42px; place-items: center; border: 2px solid var(--ink); border-radius: 14px; color: #fff; background: var(--primary); box-shadow: 0 3px 0 var(--ink); font-size: 20px; font-weight: 900; transform: rotate(-3deg); }
+.coach-head strong { font-size: 17px; }
+.coach-card > p { margin: 13px 0 0; color: var(--ink-soft); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 14px; line-height: 1.65; }
+.number-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.number-button { position: relative; min-width: 54px; min-height: 58px; padding: 5px; border: 2px solid #cbc5df; border-radius: 15px; background: #fff; box-shadow: 0 4px 0 #ddd8e8; color: var(--primary-dark); font-size: 25px; font-weight: 900; transition: transform var(--fast), border-color var(--fast), background var(--fast), box-shadow var(--fast); }
+.number-button small { position: absolute; right: 7px; bottom: 3px; color: var(--ink-soft); font-family: system-ui, sans-serif; font-size: 9px; font-weight: 800; }
+.number-button:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-soft); transform: translateY(-2px); }
+.number-button:active:not(:disabled), .tool-button:active, .new-game-button:active { transform: translateY(3px); box-shadow: 0 1px 0 #c9c3dd; }
+.number-button:disabled { opacity: .38; cursor: not-allowed; }
+.tool-row { display: grid; grid-template-columns: 1fr 1.35fr; gap: 10px; }
+.tool-button, .new-game-button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 10px 12px; border: 2px solid #cbc5df; border-radius: 15px; background: #fff; box-shadow: 0 4px 0 #ddd8e8; font-size: 14px; font-weight: 900; transition: transform var(--fast), box-shadow var(--fast), background var(--fast); }
+.tool-button svg, .new-game-button svg { width: 20px; margin-right: 6px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hint-tool { color: #815b10; border-color: #e2bd52; background: #fff8d7; box-shadow-color: #e1c66d; }
+.game-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.game-stats div { padding: 12px; border: 2px solid var(--line); border-radius: 15px; background: #faf9ff; }
+.game-stats span { display: block; color: var(--ink-soft); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 12px; }
+.game-stats strong { display: block; margin-top: 2px; font-size: 18px; font-variant-numeric: tabular-nums; }
+.new-game-button { width: 100%; color: #fff; border-color: var(--ink); background: var(--primary); box-shadow: 0 5px 0 var(--ink); }
+
+.complete-dialog { width: min(440px, calc(100% - 32px)); padding: 30px; border: 3px solid var(--ink); border-radius: 28px; color: var(--ink); background: #fffdf6; box-shadow: 0 12px 0 rgba(41,36,81,.2); text-align: center; }
+.complete-dialog::backdrop { background: rgba(35,30,69,.55); backdrop-filter: blur(3px); }
+.dialog-badge { display: grid; width: 76px; height: 76px; margin: 0 auto 18px; place-items: center; border: 3px solid var(--ink); border-radius: 24px; background: #fff2b5; box-shadow: 0 5px 0 var(--ink); transform: rotate(-4deg); }
+.dialog-badge svg { width: 48px; fill: var(--yellow); stroke: #9b6700; stroke-width: 1.2; }
+.complete-dialog h2 { margin: 0; font-size: 29px; }
+.complete-dialog > p:not(.eyebrow) { color: var(--ink-soft); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+.dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+.dialog-actions button { min-height: 50px; border: 2px solid var(--line); border-radius: 14px; background: #fff; font-weight: 900; }
+.dialog-actions button.primary { color: #fff; border-color: var(--ink); background: var(--primary); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+@keyframes sudoku-shake { 0%,100% { transform: translateX(0); } 35% { transform: translateX(-4px); } 70% { transform: translateX(4px); } }
+
+@media (max-width: 900px) {
+  .sudoku-hero { min-height: 150px; padding: 24px 30px; }
+  .sudoku-hero h1 { font-size: 39px; }
+  .mini-grid { width: 96px; height: 96px; }
+  .rule-grid div { padding: 11px 13px; }
+  .game-layout { grid-template-columns: minmax(0, 560px); }
+  .game-panel { grid-template-columns: 1fr 1fr; }
+  .coach-card { grid-column: 1 / -1; min-height: 110px; }
+  .number-pad { grid-template-columns: repeat(9, 1fr); grid-column: 1 / -1; }
+  .number-button { min-width: 0; min-height: 54px; }
+  .tool-row, .game-stats { align-self: stretch; }
+  .new-game-button { grid-column: 1 / -1; }
+}
+
+@media (max-width: 680px) {
+  .sudoku-shell { width: min(100% - 20px, 1120px); margin-top: 14px; }
+  .sudoku-hero { min-height: 128px; padding: 22px; border-radius: 25px; }
+  .sudoku-hero h1 { font-size: 31px; }
+  .sudoku-hero p:last-child { font-size: 14px; }
+  .mini-grid { display: none; }
+  .lesson-card { margin-top: 24px; padding: 19px; }
+  .lesson-heading h2 { font-size: 21px; }
+  .rule-grid { grid-template-columns: 1fr; gap: 8px; }
+  .rule-grid div { min-height: 0; }
+  .lesson-tip { font-size: 14px; }
+  .sudoku-game { margin-top: 28px; padding: 15px 10px 22px; border-radius: 25px; }
+  .game-toolbar { align-items: stretch; flex-direction: column; padding: 4px 5px 17px; }
+  .game-toolbar h2 { font-size: 24px; }
+  .difficulty-tabs { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .difficulty-button { min-width: 0; padding-inline: 6px; }
+  .game-layout { gap: 24px; padding-top: 18px; }
+  .sudoku-board { border-width: 3px; border-radius: 8px; box-shadow: 0 5px 0 #cbc5df; }
+  .sudoku-cell { font-size: clamp(18px, 6.5vw, 25px); }
+  .sudoku-cell.box-right { border-right-width: 3px; }
+  .sudoku-cell.box-bottom { border-bottom-width: 3px; }
+  .board-caption { margin-top: 12px; }
+  .game-panel { grid-template-columns: 1fr; gap: 15px; padding: 0 6px; }
+  .coach-card, .number-pad, .new-game-button { grid-column: auto; }
+  .number-pad { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .number-button { min-height: 48px; border-radius: 12px; font-size: 21px; }
+  .number-button small { display: block; }
+  .tool-row { grid-template-columns: 1fr 1.25fr; }
+}
+
+@media (max-width: 390px) {
+  .sudoku-hero h1 { font-size: 28px; }
+  .lesson-icon { width: 44px; height: 44px; }
+  .sudoku-cell { font-size: 21px; }
+  .number-button { min-height: 44px; font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sudoku-cell { transition: none; }
+}
