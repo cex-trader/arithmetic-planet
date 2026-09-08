@@ -48,23 +48,32 @@ const questionSets = {
     }
   },
   story: {
-    title: "哪个算式讲的是这个故事？",
-    label: "故事任务",
+    title: "读懂故事里的数量关系",
+    label: "情景翻译任务",
     levels: {
       1: [
-        { story: "盒子里原来有 <strong>12 支笔</strong>，老师又放进 <strong>3 包</strong>，每包 <strong>10 支</strong>。现在一共有多少支？", options: ["12 ＋ 10 × 3", "(12 ＋ 10) × 3"], correct: 0, explain: "3 包、每包 10 支，是 10 × 3；再和原来的 12 支合起来。", hint: "先找“几包、每包几个”，它们组成一个乘法小队。" },
-        { story: "小明有 <strong>8 张</strong>卡片，又买了 <strong>4 袋</strong>，每袋 <strong>5 张</strong>。一共有多少张？", options: ["8 ＋ 4 × 5", "(8 ＋ 4) × 5"], correct: 0, explain: "4 袋每袋 5 张是 4 × 5，再加原来的 8 张。", hint: "原来的 8 张并不在袋子里，所以不能和 4 一起乘 5。" },
-        { story: "有 <strong>6 组</strong>小朋友，每组 <strong>7 人</strong>，其中 <strong>9 人</strong>去拿道具。还剩多少人？", options: ["6 × 7 － 9", "6 × (7 － 9)"], correct: 0, explain: "先算 6 组一共有多少人，再减去离开的 9 人。", hint: "离开的是总人数中的 9 人，不是每组离开 9 人。" }
+        { question: "这个故事应该怎样列式？", story: "盒子里原来有 <strong>12 支笔</strong>，老师又放进 <strong>3 包</strong>，每包 <strong>10 支</strong>。现在一共有多少支？", options: ["12 ＋ 10 × 3", "(12 ＋ 10) × 3"], correct: 0, explain: "3 包、每包 10 支，是 10 × 3；再和原来的 12 支合起来。", hint: "先找“几包、每包几个”，它们组成一个乘法小队。", steps: ["数量：原来12支、3包、每包10支", "小队：3包每包10支，是10×3", "合起来：12＋10×3"] },
+        { question: "这个故事应该怎样列式？", story: "小明有 <strong>8 张</strong>卡片，又买了 <strong>4 袋</strong>，每袋 <strong>5 张</strong>。一共有多少张？", options: ["8 ＋ 4 × 5", "(8 ＋ 4) × 5"], correct: 0, explain: "4 袋每袋 5 张是 4 × 5，再加原来的 8 张。", hint: "原来的 8 张并不在袋子里，所以不能和 4 一起乘 5。", steps: ["数量：原来8张、4袋、每袋5张", "小队：4袋每袋5张，是4×5", "求总数：8＋4×5"] },
+        { question: "这个故事应该怎样列式？", story: "有 <strong>6 组</strong>小朋友，每组 <strong>7 人</strong>，其中 <strong>9 人</strong>去拿道具。还剩多少人？", options: ["6 × 7 － 9", "6 × (7 － 9)"], correct: 0, explain: "先算 6 组一共有多少人，再减去离开的 9 人。", hint: "离开的是总人数中的 9 人，不是每组离开 9 人。", steps: ["数量：6组、每组7人、离开9人", "先求总人数：6×7", "求剩下：6×7－9"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "12 ＋ 10 × 3", options: ["原来有12支笔，又买3包，每包10支，求一共有多少支。", "有3个盒子，每盒先放12支，再放10支，求一共有多少支。"], correct: 0, explain: "10 × 3 表示 3 包、每包 10 支；12 是另外原有的数量。", hint: "先把 10 × 3 看作一个整体：3 个 10。", wrongHints: ["", "这个故事会列成 (12＋10)×3，因为每个盒子都有12支和10支。"], steps: ["先看乘法：10×3是3个10", "12不参加乘法，是另外的一份", "故事结构：原有12，再加3包每包10"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "4 × 6 ＋ 8", options: ["有4盒彩笔，每盒6支，另外还有8支，求总数。", "有4盒彩笔，每盒有6支红笔和8支蓝笔，求总数。"], correct: 0, explain: "4 × 6 是 4 个 6，算出盒子里的总数后，再加盒子外的 8 支。", hint: "问一问：8 有没有也重复 4 次？算式里它没有乘 4。", wrongHints: ["", "如果每盒都有6支和8支，应该列成4×(6＋8)。"], steps: ["乘法小队：4盒、每盒6支", "另外8支没有装在每个盒子里", "故事结构：4×6，再加8"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "35 － 5 × 4", options: ["原有35颗糖，送给4人，每人5颗，求还剩多少颗。", "把35颗糖先拿走5颗，再把剩下的平均分成4份。"], correct: 0, explain: "5 × 4 是送出的总数，再从原来的 35 颗中减去。", hint: "乘法 5 × 4 应该对应“4人、每人5颗”。", wrongHints: ["", "这个故事先做35－5，接下来是除以4，不符合原算式。"], steps: ["原来总数：35颗", "送出小队：4人每人5颗，是5×4", "求剩下：35－5×4"] }
       ],
       2: [
-        { story: "把 <strong>48 块</strong>积木平均装进 <strong>6 个盒子</strong>，再给每个盒子添 <strong>3 块</strong>。每盒现在有几块？", options: ["48 ÷ 6 ＋ 3", "48 ÷ (6 ＋ 3)"], correct: 0, explain: "先平均分：48 ÷ 6；再给每盒增加 3 块。", hint: "增加的是每个盒子里的数量，不是盒子的个数。" },
-        { story: "一本书有 <strong>60 页</strong>。小禾每天读 <strong>8 页</strong>，读了 <strong>5 天</strong>，还剩多少页？", options: ["60 － 8 × 5", "(60 － 8) × 5"], correct: 0, explain: "5 天一共读了 8 × 5 页，再从 60 页中减去。", hint: "先求 5 天总共读了多少页。" },
-        { story: "有 <strong>3 箱</strong>球，每箱 <strong>24 个</strong>，平均分给 <strong>8 个班</strong>。每班几个？", options: ["3 × 24 ÷ 8", "3 × 24 ＋ 8"], correct: 0, explain: "先算 3 箱一共有多少个球，再把总数平均分给 8 个班。", hint: "“平均分”要用除法，不是加法。" }
+        { question: "这个故事应该怎样列式？", story: "把 <strong>48 块</strong>积木平均装进 <strong>6 个盒子</strong>，再给每个盒子添 <strong>3 块</strong>。每盒现在有几块？", options: ["48 ÷ 6 ＋ 3", "48 ÷ (6 ＋ 3)"], correct: 0, explain: "先平均分：48 ÷ 6；再给每盒增加 3 块。", hint: "增加的是每个盒子里的数量，不是盒子的个数。", steps: ["平均分：48块装进6盒", "先求每盒：48÷6", "每盒再添3块：48÷6＋3"] },
+        { question: "这个故事应该怎样列式？", story: "一本书有 <strong>60 页</strong>。小禾每天读 <strong>8 页</strong>，读了 <strong>5 天</strong>，还剩多少页？", options: ["60 － 8 × 5", "(60 － 8) × 5"], correct: 0, explain: "5 天一共读了 8 × 5 页，再从 60 页中减去。", hint: "先求 5 天总共读了多少页。", steps: ["总数：一本书60页", "读掉：5天每天8页，是8×5", "求剩下：60－8×5"] },
+        { question: "这个故事应该怎样列式？", story: "有 <strong>3 箱</strong>球，每箱 <strong>24 个</strong>，平均分给 <strong>8 个班</strong>。每班几个？", options: ["3 × 24 ÷ 8", "3 × 24 ＋ 8"], correct: 0, explain: "先算 3 箱一共有多少个球，再把总数平均分给 8 个班。", hint: "“平均分”要用除法，不是加法。", steps: ["先求总数：3箱每箱24个", "球的总数：3×24", "平均分8班：3×24÷8"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "8 ＋ 24 ÷ 4", options: ["小雨原有8颗糖，24颗糖平均分给4人，她又得到其中一份，求现在有几颗。", "小雨有8颗糖，又得到24颗，然后把全部糖平均分给4人。"], correct: 0, explain: "24 ÷ 4 是平均分后的一份，再和原来的 8 颗合起来。", hint: "算式里只有24参加平均分，8没有被除以4。", wrongHints: ["", "这个故事应列成(8＋24)÷4，因为全部糖都参加平均分。"], steps: ["除法小队：24颗平均分4份", "8是原来单独拥有的", "故事结构：原有8，再加24÷4所得的一份"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "72 ÷ 8 × 3", options: ["72张卡片平均分成8组，求其中3组一共有多少张。", "72张卡片平均分给8×3个小朋友，求每人多少张。"], correct: 0, explain: "乘除同级从左往右：先求每组 72 ÷ 8 张，再求 3 组的数量。", hint: "先把算式读成：72平均分8份，取其中3份。", wrongHints: ["", "这个故事把8×3当成总人数，需要括号：72÷(8×3)。"], steps: ["先平均分：72÷8，求一组", "再取3组：一组数量×3", "故事顺序：平均分8组，再求3组"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "45 － 18 ÷ 3", options: ["原有45本书，把18本平均放在3层，拿走其中一层的书，求还剩多少本。", "从45本书中拿走18本，再把剩下的平均放在3层。"], correct: 0, explain: "18 ÷ 3 是一层的数量，45 减去的是这一层，而不是全部 18 本。", hint: "先解释18÷3代表什么，再看45减去了谁。", wrongHints: ["", "这个故事的顺序是(45－18)÷3，与原算式不同。"], steps: ["除法小队：18本平均放3层", "拿走其中一层：18÷3本", "求剩下：45－18÷3"] }
       ],
       3: [
-        { story: "每个礼盒需要 <strong>6 颗红星</strong>和 <strong>4 颗蓝星</strong>，做 <strong>5 个</strong>礼盒，共需要多少颗？", options: ["(6 ＋ 4) × 5", "6 ＋ 4 × 5"], correct: 0, explain: "每盒先合计 6＋4＝10 颗，5 盒就是 (6＋4) × 5。", hint: "红星和蓝星是每一个礼盒都需要的。" },
-        { story: "原有 <strong>90 元</strong>，买了 <strong>7 本</strong>每本 <strong>8 元</strong>的本子，又买一支 <strong>6 元</strong>的笔。还剩多少元？", options: ["90 － (7 × 8 ＋ 6)", "90 － 7 × 8 ＋ 6"], correct: 0, explain: "本子和笔都是花掉的钱，要先合起来，再从 90 元中减去。", hint: "6 元也是花掉的钱，不能在最后加回来。" },
-        { story: "甲筐有 <strong>30 个</strong>苹果，乙筐有 <strong>18 个</strong>，把两筐苹果平均分给 <strong>6 人</strong>。每人几个？", options: ["(30 ＋ 18) ÷ 6", "30 ＋ 18 ÷ 6"], correct: 0, explain: "要先合并两筐得到总数 48，再平均分给 6 人。", hint: "平均分的是两筐合起来的全部苹果。" }
+        { question: "这个故事应该怎样列式？", story: "每个礼盒需要 <strong>6 颗红星</strong>和 <strong>4 颗蓝星</strong>，做 <strong>5 个</strong>礼盒，共需要多少颗？", options: ["(6 ＋ 4) × 5", "6 ＋ 4 × 5"], correct: 0, explain: "每盒先合计 6＋4＝10 颗，5 盒就是 (6＋4) × 5。", hint: "红星和蓝星是每一个礼盒都需要的。", steps: ["每盒：6颗红星加4颗蓝星", "括号表示每盒的总数：6＋4", "5个相同礼盒：(6＋4)×5"] },
+        { question: "这个故事应该怎样列式？", story: "原有 <strong>90 元</strong>，买了 <strong>7 本</strong>每本 <strong>8 元</strong>的本子，又买一支 <strong>6 元</strong>的笔。还剩多少元？", options: ["90 － (7 × 8 ＋ 6)", "90 － 7 × 8 ＋ 6"], correct: 0, explain: "本子和笔都是花掉的钱，要先合起来，再从 90 元中减去。", hint: "6 元也是花掉的钱，不能在最后加回来。", steps: ["本子花费：7本每本8元，是7×8", "总花费：7×8再加6元", "求剩下：90－(7×8＋6)"] },
+        { question: "这个故事应该怎样列式？", story: "甲筐有 <strong>30 个</strong>苹果，乙筐有 <strong>18 个</strong>，把两筐苹果平均分给 <strong>6 人</strong>。每人几个？", options: ["(30 ＋ 18) ÷ 6", "30 ＋ 18 ÷ 6"], correct: 0, explain: "要先合并两筐得到总数 48，再平均分给 6 人。", hint: "平均分的是两筐合起来的全部苹果。", steps: ["先合并两筐：30＋18", "括号表示参加平均分的总数", "平均分6人：(30＋18)÷6"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "(12 ＋ 8) × 3", options: ["每个礼包里有12张贴纸和8张卡片，做3个相同礼包，求一共多少件。", "原有12张贴纸，又买3包卡片，每包8张，求一共有多少张。"], correct: 0, explain: "括号说明每一份都有 12＋8，整个这样的组合重复 3 次。", hint: "括号里的12和8都要乘3，也就是每个礼包都有这两样。", wrongHints: ["", "这个故事是12＋8×3，12只出现一次，不符合括号。"], steps: ["括号整体：每份都有12和8", "括号外×3：这样的整份有3个", "故事结构：3个相同礼包，每个都有12＋8"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "72 ÷ (6 ＋ 3)", options: ["72块饼干平均分给6名男生和3名女生，求每人几块。", "72块饼干平均分给6名男生，每人再得到3块。"], correct: 0, explain: "括号里的 6＋3 是一起参加平均分的总人数。", hint: "除数是整个括号，所以6人和3人都参加平均分。", wrongHints: ["", "这个故事应列成72÷6＋3，3表示每人增加的数量。"], steps: ["参加人数：6名男生加3名女生", "括号表示总人数：6＋3", "72平均分给总人数：72÷(6＋3)"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "6 × (15 － 9) ＋ 4", options: ["每盒原有15颗珠子，拿走9颗；有6盒，另外还有4颗，求剩下总数。", "有6盒，每盒15颗，拿走9颗，再拿走4颗，求剩下多少。"], correct: 0, explain: "每一盒都先做 15－9，然后这样的盒子有 6 个，最后再加另外的 4 颗。", hint: "括号里的15－9会重复6次，4只在最后出现一次。", wrongHints: ["", "这个故事接近6×15－9－4，9并不是每盒都拿走。"], steps: ["每盒剩下：15－9", "6盒都这样：6×(15－9)", "另外4颗：6×(15－9)＋4"] }
       ]
     }
   },
@@ -111,6 +120,7 @@ const elements = {
   modeLabel: document.querySelector("#modeLabel"),
   practiceTitle: document.querySelector("#practiceTitle"),
   promptArea: document.querySelector("#promptArea"),
+  translationLens: document.querySelector("#translationLens"),
   answerArea: document.querySelector("#answerArea"),
   feedback: document.querySelector("#feedback"),
   feedbackTitle: document.querySelector("#feedbackTitle"),
@@ -161,7 +171,7 @@ function renderQuestion() {
   stopSpeaking();
 
   elements.modeLabel.textContent = group.label;
-  elements.practiceTitle.textContent = group.title;
+  elements.practiceTitle.textContent = question.question || group.title;
   elements.questionNumber.textContent = `第 ${state.index + 1} / ${questions.length} 题`;
   elements.progressFill.style.width = `${((state.index + 1) / questions.length) * 100}%`;
   elements.feedback.className = "feedback";
@@ -174,6 +184,10 @@ function renderQuestion() {
 
   if (question.story) {
     elements.promptArea.innerHTML = `<div class="story-prompt">${question.story}</div>`;
+  } else if (question.scenario) {
+    elements.promptArea.innerHTML = `
+      <p class="scenario-instruction">先不要算答案，试着说一说每个数代表什么。</p>
+      <div class="expression scenario-expression">${question.scenario}</div>`;
   } else if (question.compare) {
     elements.promptArea.innerHTML = `
       <div class="compare-prompt">
@@ -185,11 +199,14 @@ function renderQuestion() {
     elements.promptArea.innerHTML = `<div class="expression">${question.prompt}</div>`;
   }
 
+  renderTranslationLens(question);
+
   elements.answerArea.innerHTML = "";
   shuffle(question.options.map((option, index) => ({ option, index }))).forEach(({ option, index }) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "answer-button";
+    if (question.scenario) button.classList.add("story-choice");
     button.textContent = option;
     button.addEventListener("click", () => checkAnswer(index, button));
     elements.answerArea.appendChild(button);
@@ -213,6 +230,7 @@ function checkAnswer(index, button) {
     [...elements.answerArea.children].forEach((item) => { item.disabled = true; });
     const feedbackTitle = state.attempts === 0 ? `太棒了，获得 ${earned} 颗星！` : "找到了，就是这一块！";
     showFeedback("success", feedbackTitle, question.explain);
+    if (state.mode === "story") revealTranslationSteps(question, 3);
     elements.nextButton.disabled = false;
     if (state.index === getQuestions().length - 1) {
       elements.nextButtonLabel.textContent = "完成本轮";
@@ -228,8 +246,12 @@ function checkAnswer(index, button) {
     button.classList.remove("wrong");
     void button.offsetWidth;
     button.classList.add("wrong");
-    const retryText = state.attempts >= 2 ? question.hint : "先别急着计算答案，看看运算符和括号。";
+    const storyHint = question.wrongHints?.[index] || question.hint;
+    const retryText = state.mode === "story"
+      ? storyHint
+      : state.attempts >= 2 ? question.hint : "先别急着计算答案，看看运算符和括号。";
     showFeedback("try-again", "没关系，再观察一次", retryText);
+    if (state.mode === "story") revealTranslationSteps(question, Math.min(state.attempts, 2));
     giveAudioFeedback("wrong", `再观察一次。${retryText}`);
   }
 }
@@ -240,11 +262,35 @@ function showFeedback(type, title, text) {
   elements.feedbackText.textContent = text;
 }
 
+function renderTranslationLens(question) {
+  if (state.mode !== "story") {
+    elements.translationLens.hidden = true;
+    elements.translationLens.innerHTML = "";
+    return;
+  }
+  elements.translationLens.hidden = false;
+  elements.translationLens.innerHTML = `
+    <div class="lens-step"><span>1</span><div><strong>找数量</strong><small>每个数字代表什么？</small></div></div>
+    <div class="lens-step"><span>2</span><div><strong>组小队</strong><small>哪两个数量关系最紧？</small></div></div>
+    <div class="lens-step"><span>3</span><div><strong>看问题</strong><small>最后要求总数、剩下还是每份？</small></div></div>`;
+  elements.translationLens.dataset.hasSteps = String(Boolean(question.steps));
+}
+
+function revealTranslationSteps(question, count) {
+  if (!question.steps) return;
+  [...elements.translationLens.querySelectorAll(".lens-step")].forEach((step, index) => {
+    if (index >= count) return;
+    step.classList.add("revealed");
+    step.querySelector("small").textContent = question.steps[index];
+  });
+}
+
 function showHint() {
   if (state.answered) return;
   const question = currentQuestion();
   state.usedHint = true;
   showFeedback("hint", "提示卡", question.hint);
+  if (state.mode === "story") revealTranslationSteps(question, 2);
   giveAudioFeedback("hint", `提示。${question.hint}`);
 }
 
@@ -267,6 +313,7 @@ function renderCompletion() {
   elements.questionNumber.textContent = `${total} / ${total} 题`;
   elements.progressFill.style.width = "100%";
   elements.feedback.className = "feedback";
+  elements.translationLens.hidden = true;
   elements.promptArea.innerHTML = `
     <div class="round-summary" aria-label="本轮学习成绩">
       <div class="summary-item"><strong>${total}</strong><span>完成题目</span></div>
