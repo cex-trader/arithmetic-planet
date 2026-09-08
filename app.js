@@ -403,16 +403,57 @@ function stopSpeaking() {
   if ("speechSynthesis" in window) window.speechSynthesis.cancel();
 }
 
+function integerToChinese(value) {
+  const number = Number(value);
+  if (!Number.isSafeInteger(number) || number < 0 || number > 9999) return String(value);
+  if (number === 0) return "零";
+  const digits = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+  const units = ["", "十", "百", "千"];
+  const source = String(number);
+  let result = "";
+  let pendingZero = false;
+
+  [...source].forEach((character, index) => {
+    const digit = Number(character);
+    const unit = units[source.length - index - 1];
+    if (digit === 0) {
+      if (result && [...source.slice(index + 1)].some((item) => item !== "0")) pendingZero = true;
+      return;
+    }
+    if (pendingZero) {
+      result += "零";
+      pendingZero = false;
+    }
+    const omitOne = digit === 1 && unit === "十" && result === "";
+    result += `${omitOne ? "" : digits[digit]}${unit}`;
+  });
+  return result;
+}
+
 function speechFriendlyText(text) {
   return text
-    .replaceAll("×", "乘")
-    .replaceAll("÷", "除以")
-    .replaceAll("＝", "等于")
-    .replaceAll("＋", "加")
-    .replaceAll("－", "减")
-    .replaceAll("(", "，括号，")
+    .replace(/\d+/g, integerToChinese)
+    .replace(/[×*]/g, "，乘以，")
+    .replace(/[÷/]/g, "，除以，")
+    .replace(/[＝=]/g, "，等于，")
+    .replace(/[＋+]/g, "，加，")
+    .replace(/[－-]/g, "，减，")
+    .replaceAll("(", "，括号里，")
     .replaceAll(")", "，括号结束，")
-    .replace(/\s+/g, " ");
+    .replace(/\s*，\s*/g, "，")
+    .replace(/，{2,}/g, "，")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function speechMarkup(text) {
+  const escaped = speechFriendlyText(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+  return `<speak>${escaped
+    .replace(/([，；：])/g, '$1<break time="120ms"/>')
+    .replace(/([。！？])/g, '$1<break time="240ms"/>')}</speak>`;
 }
 
 function speak(text) {
@@ -420,7 +461,7 @@ function speak(text) {
 
   const requestId = ++speechRequestId;
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(speechFriendlyText(text));
+  const utterance = new SpeechSynthesisUtterance(speechMarkup(text));
   const voices = window.speechSynthesis.getVoices();
   const chineseVoices = voices.filter((voice) => voice.lang.toLowerCase().startsWith("zh"));
   const preferredVoice = chineseVoices.find((voice) => voice.localService && /zh[-_](cn|hans)/i.test(voice.lang))
@@ -429,8 +470,8 @@ function speak(text) {
 
   utterance.lang = preferredVoice?.lang || "zh-CN";
   if (preferredVoice) utterance.voice = preferredVoice;
-  utterance.rate = 0.88;
-  utterance.pitch = 1.06;
+  utterance.rate = 0.92;
+  utterance.pitch = 1.02;
   utterance.volume = 1;
 
   // A short delay avoids an older WebKit issue where cancel() could also remove
