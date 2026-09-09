@@ -24,7 +24,7 @@ const questionSets = {
     }
   },
   calculate: {
-    title: "先拆一步，结果是多少？",
+    title: "按照正确的运算顺序，结果是多少？",
     label: "计算任务",
     levels: {
       1: [
@@ -64,7 +64,7 @@ const questionSets = {
         { question: "这个故事应该怎样列式？", story: "一本书有 <strong>60 页</strong>。小禾每天读 <strong>8 页</strong>，读了 <strong>5 天</strong>，还剩多少页？", options: ["60 － 8 × 5", "(60 － 8) × 5"], correct: 0, explain: "5 天一共读了 8 × 5 页，再从 60 页中减去。", hint: "先求 5 天总共读了多少页。", steps: ["总数：一本书60页", "读掉：5天每天8页，是8×5", "求剩下：60－8×5"] },
         { question: "这个故事应该怎样列式？", story: "有 <strong>3 箱</strong>球，每箱 <strong>24 个</strong>，平均分给 <strong>8 个班</strong>。每班几个？", options: ["3 × 24 ÷ 8", "3 × 24 ＋ 8"], correct: 0, explain: "先算 3 箱一共有多少个球，再把总数平均分给 8 个班。", hint: "“平均分”要用除法，不是加法。", steps: ["先求总数：3箱每箱24个", "球的总数：3×24", "平均分8班：3×24÷8"] },
         { question: "哪个故事和这个算式意思一样？", scenario: "8 ＋ 24 ÷ 4", options: ["小雨原有8颗糖，24颗糖平均分给4人，她又得到其中一份，求现在有几颗。", "小雨有8颗糖，又得到24颗，然后把全部糖平均分给4人。"], correct: 0, explain: "24 ÷ 4 是平均分后的一份，再和原来的 8 颗合起来。", hint: "算式里只有24参加平均分，8没有被除以4。", wrongHints: ["", "这个故事应列成(8＋24)÷4，因为全部糖都参加平均分。"], steps: ["除法小队：24颗平均分4份", "8是原来单独拥有的", "故事结构：原有8，再加24÷4所得的一份"] },
-        { question: "哪个故事和这个算式意思一样？", scenario: "72 ÷ 8 × 3", options: ["72张卡片平均分成8组，求其中3组一共有多少张。", "72张卡片平均分给8×3个小朋友，求每人多少张。"], correct: 0, explain: "乘除同级从左往右：先求每组 72 ÷ 8 张，再求 3 组的数量。", hint: "先把算式读成：72平均分8份，取其中3份。", wrongHints: ["", "这个故事把8×3当成总人数，需要括号：72÷(8×3)。"], steps: ["先平均分：72÷8，求一组", "再取3组：一组数量×3", "故事顺序：平均分8组，再求3组"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "72 ÷ 8 × 3", options: ["把72张卡片平均分成8组，其中3组一共有多少张？", "72张卡片平均分给8×3个小朋友，求每人多少张。"], correct: 0, explain: "乘除同级从左往右：先求每组 72 ÷ 8 张，再求 3 组的数量。", hint: "先把算式读成：72平均分8份，取其中3份。", wrongHints: ["", "这个故事把8×3当成总人数，需要括号：72÷(8×3)。"], steps: ["先平均分：72÷8，求一组", "再取3组：一组数量×3", "故事顺序：平均分8组，再求3组"] },
         { question: "哪个故事和这个算式意思一样？", scenario: "45 － 18 ÷ 3", options: ["原有45本书，把18本平均放在3层，拿走其中一层的书，求还剩多少本。", "从45本书中拿走18本，再把剩下的平均放在3层。"], correct: 0, explain: "18 ÷ 3 是一层的数量，45 减去的是这一层，而不是全部 18 本。", hint: "先解释18÷3代表什么，再看45减去了谁。", wrongHints: ["", "这个故事的顺序是(45－18)÷3，与原算式不同。"], steps: ["除法小队：18本平均放3层", "拿走其中一层：18÷3本", "求剩下：45－18÷3"] }
       ],
       3: [
@@ -397,9 +397,15 @@ function celebrate() {
 
 let audioContext;
 let speechRequestId = 0;
+let prerecordedAudio;
 
 function stopSpeaking() {
   speechRequestId += 1;
+  if (prerecordedAudio) {
+    prerecordedAudio.pause();
+    prerecordedAudio.currentTime = 0;
+    prerecordedAudio = null;
+  }
   if ("speechSynthesis" in window) window.speechSynthesis.cancel();
 }
 
@@ -432,6 +438,9 @@ function integerToChinese(value) {
 
 function speechFriendlyText(text) {
   return text
+    // Pause after a complete expression before explanatory prose, while
+    // keeping number-and-measure-word phrases such as “8 张” connected.
+    .replace(/((?:\(?\d+\)?\s*[×*÷/＋+－\-=＝]\s*)+\(?\d+\)?)\s+(?![个只本张支颗块页天元人组份层盒包袋班次倍米厘米])(?=[\p{Script=Han}])/gu, "$1，")
     .replace(/\d+/g, integerToChinese)
     .replace(/[×*]/g, "，乘以，")
     .replace(/[÷/]/g, "，除以，")
@@ -442,7 +451,7 @@ function speechFriendlyText(text) {
     .replaceAll(")", "，括号结束，")
     .replace(/\s*，\s*/g, "，")
     .replace(/，{2,}/g, "，")
-    .replace(/\s+/g, " ")
+    .replace(/\s+/g, "")
     .trim();
 }
 
@@ -484,7 +493,33 @@ function speak(text) {
 
 function giveAudioFeedback(type, text) {
   if (!state.sound) return;
+  if (playPrerecordedAudio(type, text)) return;
   if (!speak(text)) playTone(type);
+}
+
+function playPrerecordedAudio(type, text) {
+  const source = window.ARITHMETIC_AUDIO?.[text];
+  if (!source) return false;
+
+  stopSpeaking();
+  const requestId = speechRequestId;
+  const audio = new Audio(source);
+  let fallbackStarted = false;
+  prerecordedAudio = audio;
+
+  const fallback = () => {
+    if (fallbackStarted || requestId !== speechRequestId || !state.sound) return;
+    fallbackStarted = true;
+    prerecordedAudio = null;
+    if (!speak(text)) playTone(type);
+  };
+
+  audio.addEventListener("ended", () => {
+    if (prerecordedAudio === audio) prerecordedAudio = null;
+  }, { once: true });
+  audio.addEventListener("error", fallback, { once: true });
+  audio.play().catch(fallback);
+  return true;
 }
 
 function playTone(type) {

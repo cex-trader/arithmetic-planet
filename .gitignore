@@ -1,0 +1,5 @@
+.DS_Store
+
+# Local preview clips that are not referenced by the generated manifest.
+assets/audio/sample-correct.mp3
+assets/audio/story/6f54490c7280a3aa.mp3
