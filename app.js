@@ -297,27 +297,18 @@ const fourthGradeQuestionSets = {
 const gradeContent = {
   2: {
     questions: secondGradeQuestionSets,
-    welcomeEyebrow: "二年级 · 今日探险任务",
-    welcomeDescription: "先找数量之间的关系，再选择更聪明的算法。",
-    thought: "你发现规律了吗？",
     levelNames: ["热身", "熟练", "思考"],
     ruleLabel: "二年级思维小口诀",
     rule: "先看数量关系，再选加减乘除；能凑整时，计算会更轻松。"
   },
   3: {
     questions: questionSets,
-    welcomeEyebrow: "三年级 · 今日探险任务",
-    welcomeDescription: "别急着算答案，先找出藏在算式里的“小队”。",
-    thought: "先算哪一块？",
     levelNames: ["基础", "混合", "挑战"],
     ruleLabel: "三年级运算小口诀",
     rule: "有括号先算括号；没有括号，先乘除、后加减；同一级，从左往右。"
   },
   4: {
     questions: fourthGradeQuestionSets,
-    welcomeEyebrow: "四年级 · 今日探险任务",
-    welcomeDescription: "先估一估、画关系，再用运算律找到更聪明的方法。",
-    thought: "什么变了，什么没变？",
     levelNames: ["数感", "策略", "探究"],
     ruleLabel: "四年级思维小口诀",
     rule: "先估范围，再找关系；能凑整就巧算，条件变化时追踪不变量。"
@@ -366,9 +357,6 @@ const state = {
 const elements = {
   gradeControl: document.querySelector(".grade-control"),
   missionGrid: document.querySelector("#missionGrid"),
-  welcomeEyebrow: document.querySelector("#welcomeEyebrow"),
-  welcomeDescription: document.querySelector("#welcomeDescription"),
-  thoughtBubble: document.querySelector("#thoughtBubble"),
   missionNote: document.querySelector("#missionNote"),
   levelControl: document.querySelector(".level-control"),
   ruleLabel: document.querySelector("#ruleLabel"),
@@ -390,7 +378,6 @@ const elements = {
   questionNumber: document.querySelector("#questionNumber"),
   progressFill: document.querySelector("#progressFill"),
   starCount: document.querySelector("#starCount"),
-  streakCount: document.querySelector("#streakCount"),
   celebration: document.querySelector("#celebration"),
   practiceCard: document.querySelector("#practiceCard")
 };
@@ -930,9 +917,6 @@ function switchLevel(level) {
 function updateGradeContent() {
   const content = gradeContent[state.grade];
   const gradeNames = { 2: "二", 3: "三", 4: "四" };
-  elements.welcomeEyebrow.textContent = content.welcomeEyebrow;
-  elements.welcomeDescription.textContent = content.welcomeDescription;
-  elements.thoughtBubble.textContent = content.thought;
   elements.missionNote.textContent = `${gradeNames[state.grade]}年级 · 每题都要说出“为什么”`;
   elements.ruleLabel.textContent = content.ruleLabel;
   elements.ruleText.textContent = content.rule;
@@ -977,7 +961,6 @@ function saveProgress() {
   localStorage.setItem("mathPlanetStars", String(state.stars));
   localStorage.setItem("mathPlanetStreak", String(state.streak));
   elements.starCount.textContent = state.stars;
-  elements.streakCount.textContent = state.streak;
 }
 
 function prefersReducedMotion() {

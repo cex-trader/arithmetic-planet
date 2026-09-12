@@ -172,56 +172,8 @@ button:focus-visible, a:focus-visible {
 
 .app-shell { width: min(1120px, calc(100% - 40px)); margin: 20px auto 80px; }
 
-.welcome-panel {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
-  min-height: 304px;
-  overflow: hidden;
-  border: 3px solid var(--ink);
-  border-radius: 38px;
-  background: linear-gradient(135deg, #fff 0%, #f3efff 100%);
-  box-shadow: var(--shadow);
-}
-
-.welcome-panel::before {
-  content: "";
-  position: absolute;
-  width: 230px;
-  height: 230px;
-  left: -110px;
-  bottom: -140px;
-  border: 32px solid rgba(255, 191, 63, .22);
-  border-radius: 50%;
-}
-
-.welcome-copy { align-self: center; padding: 44px 16px 44px 54px; z-index: 1; }
 .eyebrow { margin: 0 0 6px; color: var(--primary-dark); font-size: 13px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
-.welcome-copy h1 { margin: 0 0 10px; font-size: clamp(36px, 5vw, 58px); line-height: 1.12; letter-spacing: -.04em; }
-.welcome-copy > p:not(.eyebrow) { margin: 0; color: var(--ink-soft); font-size: 18px; font-weight: 700; }
-
-.streak-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 25px;
-  padding: 9px 16px 9px 10px;
-  border: 2px solid #f0c464;
-  border-radius: 999px;
-  background: #fff9dc;
-  color: #76451c;
-  font-size: 14px;
-}
-
-.streak-flame { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; }
-.streak-flame svg { width: 21px; fill: var(--orange); }
-
-.mascot-wrap { position: relative; display: grid; align-items: end; justify-items: center; padding-top: 66px; background: linear-gradient(145deg, transparent 20%, rgba(155, 137, 245, .15)); }
-.mascot-wrap::before { content: ""; position: absolute; width: 260px; height: 260px; border: 3px dashed rgba(103, 87, 217, .23); border-radius: 50%; }
-.mascot { position: relative; z-index: 1; width: min(260px, 95%); height: 220px; filter: drop-shadow(0 8px 0 rgba(64, 53, 122, .12)); }
-.thought-bubble { position: absolute; z-index: 2; top: 24px; right: 30px; padding: 10px 16px; border: 2px solid var(--ink); border-radius: 18px 18px 18px 5px; background: #fff; font-size: 14px; font-weight: 900; transform: rotate(2deg); }
-
-.grade-section { margin-top: 64px; }
+.grade-section { margin-top: 24px; }
 .grade-heading { margin-bottom: 16px; }
 .grade-control {
   display: grid;
@@ -266,7 +218,7 @@ button:focus-visible, a:focus-visible {
 
 .mission-section { margin-top: 48px; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 20px; }
-.section-heading h2 { margin: 0; font-size: clamp(26px, 4vw, 36px); line-height: 1.2; }
+.section-heading h1, .section-heading h2 { margin: 0; font-size: clamp(26px, 4vw, 36px); line-height: 1.2; }
 .section-note { margin: 0 0 5px; color: var(--ink-soft); font-size: 14px; font-weight: 700; }
 
 .mission-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -470,15 +422,6 @@ button:focus-visible, a:focus-visible {
 
 @media (max-width: 980px) {
   .mission-grid { grid-template-columns: repeat(2, 1fr); }
-  .welcome-panel { grid-template-columns: 1fr minmax(220px, .58fr); min-height: 232px; }
-  .welcome-copy { padding: 28px 12px 28px 36px; }
-  .welcome-copy h1 { font-size: 42px; }
-  .welcome-copy > p:not(.eyebrow) { font-size: 16px; }
-  .streak-pill { margin-top: 17px; }
-  .mascot-wrap { padding-top: 42px; }
-  .mascot-wrap::before { width: 200px; height: 200px; }
-  .mascot { height: 176px; }
-  .thought-bubble { top: 15px; right: 16px; padding: 8px 12px; }
   .mission-card { min-height: 100px; padding: 15px 18px; }
 }
 
@@ -492,12 +435,6 @@ button:focus-visible, a:focus-visible {
   .page-nav { gap: 3px; padding: 4px; }
   .page-nav-link { min-width: 54px; min-height: 44px; padding: 7px 10px; }
   .stat-chip { height: 46px; min-width: 46px; border-radius: 14px; }
-  .welcome-panel { display: block; min-height: auto; border-radius: 29px; }
-  .welcome-copy { padding: 25px 20px; text-align: center; }
-  .welcome-copy h1 { font-size: 34px; }
-  .welcome-copy > p:not(.eyebrow) { font-size: 16px; }
-  .streak-pill { margin-top: 16px; }
-  .mascot-wrap { display: none; }
   .grade-control { grid-template-columns: 1fr; gap: 12px; }
   .grade-button { min-height: 80px; padding: 12px 16px; }
   .grade-number { width: 50px; height: 50px; }
@@ -548,8 +485,6 @@ button:focus-visible, a:focus-visible {
 @media (max-width: 390px) {
   .top-actions { gap: 7px; }
   .stat-chip { min-width: 64px; padding-inline: 9px; }
-  .welcome-copy { padding-inline: 20px; }
-  .welcome-copy h1 { font-size: 31px; }
   .story-prompt { padding: 19px; font-size: 17px; }
 }
 
