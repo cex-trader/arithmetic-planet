@@ -1,3 +1,5 @@
+const AUTO_ADVANCE_AFTER_CORRECT = false;
+
 const questionSets = {
   order: {
     title: "哪一部分应该先算？",
@@ -504,7 +506,7 @@ function checkAnswer(index, button) {
     elements.hintButton.disabled = true;
     celebrate();
     elements.nextButton.focus({ preventScroll: true });
-    scheduleAutoAdvance();
+    if (AUTO_ADVANCE_AFTER_CORRECT) scheduleAutoAdvance();
   } else {
     state.attempts += 1;
     state.streak = 0;
