@@ -245,6 +245,7 @@ const state = {
   roundQuestions: [],
   roundStartStars: 0,
   firstTryCorrect: 0,
+  autoAdvanceTimer: null,
   stars: Number(localStorage.getItem("mathPlanetStars")) || 0,
   streak: Number(localStorage.getItem("mathPlanetStreak")) || 0
 };
@@ -310,6 +311,7 @@ function startRound() {
 }
 
 function renderQuestion() {
+  cancelAutoAdvance();
   const group = activeQuestionSets()[state.mode];
   const questions = getQuestions();
   const question = currentQuestion();
@@ -391,6 +393,7 @@ function checkAnswer(index, button) {
     elements.hintButton.disabled = true;
     celebrate();
     elements.nextButton.focus({ preventScroll: true });
+    scheduleAutoAdvance();
   } else {
     state.attempts += 1;
     state.streak = 0;
@@ -703,6 +706,7 @@ function renderSolutionProcess(question) {
 }
 
 function toggleSolutionProcess() {
+  cancelAutoAdvance(true);
   setSolutionExpanded(elements.solutionProcess.hidden);
 }
 
@@ -716,6 +720,7 @@ function showHint() {
 
 function nextQuestion() {
   if (!state.answered) return;
+  cancelAutoAdvance();
   if (state.index === getQuestions().length - 1) {
     renderCompletion();
     return;
@@ -723,6 +728,27 @@ function nextQuestion() {
   state.index += 1;
   renderQuestion();
   elements.practiceTitle.focus({ preventScroll: true });
+}
+
+function setManualNextLabel() {
+  elements.nextButtonLabel.textContent = state.index === getQuestions().length - 1 ? "完成本轮" : "下一题";
+}
+
+function cancelAutoAdvance(restoreLabel = false) {
+  if (state.autoAdvanceTimer !== null) {
+    window.clearTimeout(state.autoAdvanceTimer);
+    state.autoAdvanceTimer = null;
+  }
+  if (restoreLabel && state.answered) setManualNextLabel();
+}
+
+function scheduleAutoAdvance() {
+  cancelAutoAdvance();
+  elements.nextButtonLabel.textContent = state.index === getQuestions().length - 1 ? "即将完成…" : "自动下一题…";
+  state.autoAdvanceTimer = window.setTimeout(() => {
+    state.autoAdvanceTimer = null;
+    nextQuestion();
+  }, 2000);
 }
 
 function renderCompletion() {
