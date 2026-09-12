@@ -225,7 +225,7 @@ button:focus-visible, a:focus-visible {
 .grade-heading { margin-bottom: 16px; }
 .grade-control {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   max-width: 760px;
 }
@@ -259,6 +259,7 @@ button:focus-visible, a:focus-visible {
   line-height: 1;
 }
 .grade-button[data-grade="3"] .grade-number { background: var(--green); }
+.grade-button[data-grade="4"] .grade-number { background: var(--orange); }
 .grade-button > span:last-child { display: flex; flex-direction: column; }
 .grade-button strong { font-size: 19px; }
 .grade-button small { margin-top: 2px; color: var(--ink-soft); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
