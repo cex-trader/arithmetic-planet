@@ -349,7 +349,12 @@ button:focus-visible, a:focus-visible {
   animation: appear 220ms ease-out;
 }
 .solution-process[hidden] { display: none; }
-.solution-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.solution-heading { display: flex; align-items: center; gap: 10px; cursor: pointer; list-style: none; }
+.solution-heading::-webkit-details-marker { display: none; }
+.solution-heading::after { content: "展开"; margin-left: auto; color: var(--primary-dark); font-size: 14px; font-weight: 900; }
+.solution-process[open] > .solution-heading { margin-bottom: 16px; }
+.solution-process[open] > .solution-heading::after { content: "收起"; }
+.solution-heading:focus-visible { outline: 3px solid rgba(103, 82, 204, .35); outline-offset: 5px; border-radius: 12px; }
 .solution-heading span { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 11px; color: #fff; background: var(--green); font-size: 20px; font-weight: 900; }
 .solution-heading h3 { margin: 0; font-size: 20px; }
 .solution-equation { margin-bottom: 14px; padding: 12px 16px; border: 2px solid #b9dfd0; border-radius: 15px; background: #fff; color: var(--ink); font-size: clamp(20px, 4vw, 27px); font-weight: 900; text-align: center; }

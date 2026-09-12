@@ -323,6 +323,7 @@ function renderQuestion() {
   elements.feedbackTitle.textContent = "";
   elements.feedbackText.textContent = "";
   elements.solutionProcess.hidden = true;
+  elements.solutionProcess.open = false;
   elements.solutionProcess.replaceChildren();
   elements.nextButton.disabled = true;
   elements.nextButtonLabel.textContent = "下一题";
@@ -377,7 +378,7 @@ function checkAnswer(index, button) {
     [...elements.answerArea.children].forEach((item) => { item.disabled = true; });
     const feedbackTitle = state.attempts === 0 ? `太棒了，获得 ${earned} 颗星！` : "找到了，就是这一块！";
     showFeedback("success", feedbackTitle, question.explain);
-    renderSolutionProcess(question);
+    renderSolutionProcess(question, state.attempts === 0);
     if (state.mode === "story") revealTranslationSteps(question, 3);
     elements.nextButton.disabled = false;
     if (state.index === getQuestions().length - 1) {
@@ -660,25 +661,27 @@ function createSolutionColumn(parent, title, expression, question) {
   });
 }
 
-function renderSolutionProcess(question) {
+function renderSolutionProcess(question, collapsed = true) {
   const container = elements.solutionProcess;
   container.replaceChildren();
   container.hidden = false;
-  const heading = appendTextElement(container, "div", "solution-heading", "");
+  container.open = !collapsed;
+  const heading = appendTextElement(container, "summary", "solution-heading", "");
   appendTextElement(heading, "span", "", "✓");
   appendTextElement(heading, "h3", "", "一步一步这样解");
+  const content = appendTextElement(container, "div", "solution-content", "");
 
   const expressions = solutionExpressions(question);
   if (expressions.length) {
-    const columns = appendTextElement(container, "div", expressions.length > 1 ? "solution-columns" : "", "");
+    const columns = appendTextElement(content, "div", expressions.length > 1 ? "solution-columns" : "", "");
     expressions.forEach((expression, index) => {
       const title = expressions.length > 1 ? (index === 0 ? "左边算式" : "右边算式") : (question.story ? "先列出算式" : "原算式");
       createSolutionColumn(columns, title, expression, question);
     });
   } else {
-    renderSequenceModel(container, question);
-    renderSymbolModel(container, question);
-    const list = appendTextElement(container, "ol", "solution-steps", "");
+    renderSequenceModel(content, question);
+    renderSymbolModel(content, question);
+    const list = appendTextElement(content, "ol", "solution-steps", "");
     const steps = question.solution || splitExplanation(question.explain);
     steps.forEach((step, index) => {
       const item = appendTextElement(list, "li", "solution-step", "");
@@ -687,7 +690,7 @@ function renderSolutionProcess(question) {
       appendTextElement(body, "span", "solution-step-text", step);
     });
   }
-  appendTextElement(container, "p", "solution-conclusion", `所以：${question.explain}`);
+  appendTextElement(content, "p", "solution-conclusion", `所以：${question.explain}`);
 }
 
 function showHint() {
