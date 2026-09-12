@@ -100,7 +100,142 @@ const questionSets = {
   }
 };
 
+const secondGradeQuestionSets = {
+  order: {
+    title: "先观察，哪个答案最有道理？",
+    label: "规律观察任务",
+    levels: {
+      1: [
+        { prompt: "2，4，6，8，？", options: ["10", "9", "12"], correct: 0, explain: "每次都增加 2，所以 8 后面是 10。", hint: "看看相邻两个数之间相差几。" },
+        { prompt: "5，10，15，20，？", options: ["25", "22", "30"], correct: 0, explain: "每次都增加 5，所以接下来是 25。", hint: "从 5 到 10、从 10 到 15，各增加了多少？" },
+        { prompt: "30，27，24，21，？", options: ["18", "19", "17"], correct: 0, explain: "每次都减少 3，所以 21 再减 3 是 18。", hint: "这列数越来越小，找一找每次少几个。" },
+        { prompt: "1，3，6，10，？", options: ["15", "14", "16"], correct: 0, explain: "依次增加 2、3、4，下一次要增加 5，所以是 15。", hint: "把每相邻两个数的差写出来：2、3、4……" }
+      ],
+      2: [
+        { prompt: "38 ＋ 27", options: ["先算 38＋2，再加25", "先算 38＋20，再减7"], correct: 0, explain: "从 27 中拿出 2 给 38，先凑成 40，再加 25 更容易。", hint: "38 离整十数 40 还差几？", solution: ["把 27 拆成 2 和 25", "38 ＋ 2 ＝ 40", "40 ＋ 25 ＝ 65"] },
+        { prompt: "64 － 29", options: ["先算 64－30，再加1", "先算 64－20，再加9"], correct: 0, explain: "29 接近 30，先减 30 会多减 1，所以最后要加回 1。", hint: "把 29 看成 30，想想多减了还是少减了。", solution: ["把 29 看成 30－1", "64 － 30 ＝ 34", "34 ＋ 1 ＝ 35"] },
+        { prompt: "25 ＋ 18 ＋ 5", options: ["先算 25＋5", "先算 18＋5"], correct: 0, explain: "25 和 5 能凑成 30，再加 18，计算更简便。", hint: "哪两个数合起来正好是整十数？", solution: ["交换加数位置，先把 25 和 5 放在一起", "25 ＋ 5 ＝ 30", "30 ＋ 18 ＝ 48"] },
+        { prompt: "46 ＋ 19", options: ["先加20，再减1", "先加10，再减9"], correct: 0, explain: "19 比 20 少 1，先加 20，再减去多加的 1。", hint: "19 最接近哪个整十数？", solution: ["把 19 看成 20－1", "46 ＋ 20 ＝ 66", "66 － 1 ＝ 65"] }
+      ],
+      3: [
+        { prompt: "3，6，5，10，9，18，？", options: ["17", "19", "36"], correct: 0, explain: "规律是乘 2、减 1 交替进行：18 后面要减 1，得到 17。", hint: "把变化分成两种动作：×2、－1、×2、－1……" },
+        { prompt: "△ ＋ △ ＝ 16", options: ["△＝8", "△＝6", "△＝4"], correct: 0, explain: "两个相同的数合起来是 16，每个数就是 16 的一半：8。", hint: "想一想：几加几等于 16？两个加数必须相同。" },
+        { prompt: "○ ＋ 7 ＝ 20", options: ["○＝13", "○＝27", "○＝12"], correct: 0, explain: "用总数 20 减去已知的 7，得到 ○＝13。", hint: "一个加数＝和－另一个加数。" },
+        { prompt: "4 × □ ＝ 24", options: ["□＝6", "□＝8", "□＝20"], correct: 0, explain: "想乘法口诀：四六二十四，所以方框里是 6。", hint: "24 里面有几个 4？" }
+      ]
+    }
+  },
+  calculate: {
+    title: "想清楚方法，结果是多少？",
+    label: "巧算任务",
+    levels: {
+      1: [
+        { prompt: "36 ＋ 27", options: ["63", "53", "73", "61"], correct: 0, explain: "先算 36＋20＝56，再算 56＋7＝63。", hint: "把 27 拆成 20 和 7。" },
+        { prompt: "72 － 38", options: ["34", "44", "36", "40"], correct: 0, explain: "先算 72－30＝42，再算 42－8＝34。", hint: "把 38 拆成 30 和 8，分两次减。" },
+        { prompt: "6 × 4", options: ["24", "20", "26", "18"], correct: 0, explain: "6 个 4 合起来是 24，也可以用口诀四六二十四。", hint: "画 6 组，每组放 4 个点。" },
+        { prompt: "35 ÷ 5", options: ["7", "6", "8", "5"], correct: 0, explain: "因为 5 × 7＝35，所以 35 ÷ 5＝7。", hint: "想一想：5 乘几等于 35？" }
+      ],
+      2: [
+        { prompt: "48 ＋ 26 ＋ 2", options: ["76", "74", "78", "72"], correct: 0, explain: "先让 48 和 2 凑成 50，再加 26，得到 76。", hint: "先找能凑成整十数的两个数。", solution: ["交换加数位置：48＋2＋26", "48 ＋ 2 ＝ 50", "50 ＋ 26 ＝ 76"] },
+        { prompt: "83 － 27 － 3", options: ["53", "59", "50", "57"], correct: 0, explain: "27 和 3 合起来是 30，83－30＝53。", hint: "连续减去两个数，可以先想一共减了多少。", solution: ["先算一共要减多少", "27 ＋ 3 ＝ 30", "83 － 30 ＝ 53"] },
+        { prompt: "8 × 5 ＋ 6", options: ["46", "88", "40", "54"], correct: 0, explain: "先算 8 × 5＝40，再加 6 得 46。", hint: "先求 8 组、每组 5 个一共有多少。" },
+        { prompt: "42 ÷ 6 ＋ 9", options: ["16", "14", "15", "18"], correct: 0, explain: "先算 42 ÷ 6＝7，再算 7＋9＝16。", hint: "先用六七四十二求出除法。" }
+      ],
+      3: [
+        { prompt: "100 － 46 ＋ 8", options: ["62", "46", "54", "64"], correct: 0, explain: "从左往右：100－46＝54，54＋8＝62。", hint: "加减法是同一级，要从左往右算。" },
+        { prompt: "7 × (12 － 8)", options: ["28", "76", "36", "20"], correct: 0, explain: "先算括号里的 12－8＝4，再算 7 × 4＝28。", hint: "括号像任务盒，要先完成盒子里面的计算。" },
+        { prompt: "(18 ＋ 12) ÷ 5", options: ["6", "20", "8", "5"], correct: 0, explain: "先算 18＋12＝30，再把 30 平均分成 5 份，每份是 6。", hint: "先把括号里的两个数合起来。" },
+        { prompt: "6 × 8 － 19", options: ["29", "37", "31", "27"], correct: 0, explain: "先算 6 × 8＝48，再算 48－19＝29。", hint: "先求 6 个 8 的总数。" }
+      ]
+    }
+  },
+  story: {
+    title: "读懂故事里的数量关系",
+    label: "情景推理任务",
+    levels: {
+      1: [
+        { question: "这个故事应该怎样列式？", story: "小羽有 <strong>28 张</strong>贴纸，又得到 <strong>15 张</strong>，送给同学 <strong>9 张</strong>。还剩多少张？", options: ["28 ＋ 15 － 9", "28 － 15 ＋ 9"], correct: 0, explain: "先把得到的 15 张加上，再把送出的 9 张减去。", hint: "得到会让数量变多，送出会让数量变少。", steps: ["找变化：得到15张、送出9张", "先合起来：28＋15", "再求剩下：28＋15－9"] },
+        { question: "这个故事应该怎样列式？", story: "有 <strong>6 个</strong>小组，每组 <strong>4 人</strong>。一共有多少人？", options: ["6 × 4", "6 ＋ 4"], correct: 0, explain: "6 个相同的 4 要用乘法，列式为 6 × 4。", hint: "“每组一样多”而且有好几组，可以用乘法。", steps: ["每份：每组4人", "份数：一共有6组", "求总数：6×4"] },
+        { question: "这个故事应该怎样列式？", story: "把 <strong>32 本</strong>书平均放到 <strong>4 层</strong>书架上，每层放几本？", options: ["32 ÷ 4", "32 － 4"], correct: 0, explain: "把 32 平均分成 4 份，要用除法。", hint: "看到“平均放”，想一想是在平均分。", steps: ["总数：32本书", "平均分：放到4层", "求每份：32÷4"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "45 － 18", options: ["原有45颗糖，吃了18颗，求还剩多少颗。", "原有45颗糖，又买来18颗，求一共有多少颗。"], correct: 0, explain: "减法表示从原来的 45 颗中去掉 18 颗。", hint: "算式里的数量最后是变多还是变少？", wrongHints: ["", "“又买来”会让数量变多，应该用加法。"], steps: ["原来：45颗", "变化：吃掉18颗", "求剩下：45－18"] }
+      ],
+      2: [
+        { question: "这个故事应该怎样列式？", story: "有 <strong>5 盒</strong>蜡笔，每盒 <strong>8 支</strong>，画画用掉 <strong>7 支</strong>。还剩多少支？", options: ["5 × 8 － 7", "5 × (8 － 7)"], correct: 0, explain: "先求 5 盒的总数，再从总数里减去用掉的 7 支。", hint: "7 支是总共用掉的，不是每盒都用掉 7 支。", steps: ["先求总数：5盒每盒8支", "总数：5×8", "求剩下：5×8－7"] },
+        { question: "这个故事应该怎样列式？", story: "妈妈买了 <strong>3 袋</strong>苹果，每袋 <strong>6 个</strong>，又买了 <strong>5 个</strong>梨。一共买了多少个水果？", options: ["3 × 6 ＋ 5", "3 × (6 ＋ 5)"], correct: 0, explain: "3 袋苹果一共 3 × 6 个，再加另外的 5 个梨。", hint: "梨只有 5 个，并不是每袋都有 5 个。", steps: ["苹果：3袋每袋6个", "苹果总数：3×6", "加上5个梨：3×6＋5"] },
+        { question: "这个故事应该怎样列式？", story: "把 <strong>36 块</strong>饼干平均分给 <strong>6 人</strong>，每人吃掉 <strong>2 块</strong>。每人还剩几块？", options: ["36 ÷ 6 － 2", "36 ÷ (6 － 2)"], correct: 0, explain: "先求每人分到 36 ÷ 6＝6 块，再减去每人吃掉的 2 块。", hint: "先完成平均分，再看每个人手里的变化。", steps: ["平均分：36块分给6人", "每人得到：36÷6", "每人剩下：36÷6－2"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "7 × 5 ＋ 4", options: ["7组每组5人，另外来了4人，求总人数。", "7组每组有5名男生和4名女生，求总人数。"], correct: 0, explain: "4 没有参加乘法，表示 7 组之外另外的 4 人。", hint: "算式里只有 5 重复了 7 次，4 只出现一次。", wrongHints: ["", "每组都有5人和4人，应列成7×(5＋4)。"], steps: ["乘法小队：7组每组5人", "另外4人不在每组中", "求总数：7×5＋4"] }
+      ],
+      3: [
+        { question: "这个故事应该怎样列式？", story: "一根绳子长 <strong>90 米</strong>，第一次用去 <strong>28 米</strong>，第二次用去 <strong>32 米</strong>。还剩多少米？", options: ["90 － (28 ＋ 32)", "90 － 28 ＋ 32"], correct: 0, explain: "两次用去的都要从 90 米里减掉，可以先求一共用去多少。", hint: "把两次用去的长度看成一个整体。", steps: ["两次用去：28米和32米", "一共用去：28＋32", "求剩下：90－(28＋32)"] },
+        { question: "这个故事应该怎样列式？", story: "合唱队原有 <strong>24 人</strong>，又来了 <strong>12 人</strong>，现在平均站成 <strong>4 排</strong>。每排几人？", options: ["(24 ＋ 12) ÷ 4", "24 ＋ 12 ÷ 4"], correct: 0, explain: "参加平均分的是合起来的所有人，所以要先算 24＋12。", hint: "先确定一共有多少人，再平均排队。", steps: ["先求总人数：24＋12", "所有人参加平均分", "每排人数：(24＋12)÷4"] },
+        { question: "这个故事应该怎样列式？", story: "每张桌子坐 <strong>4 人</strong>，<strong>7 张</strong>桌子坐满后还有 <strong>3 人</strong>。一共有多少人？", options: ["4 × 7 ＋ 3", "4 × (7 ＋ 3)"], correct: 0, explain: "7 张桌子坐 4 × 7 人，另外还有 3 人，只需要加一次。", hint: "3 人不在那 7 张桌子的每一张上。", steps: ["桌边人数：7张每张4人", "坐桌人数：4×7", "加另外3人：4×7＋3"] },
+        { question: "哪个故事和这个算式意思一样？", scenario: "(20 ＋ 16) ÷ 4", options: ["把20个红球和16个蓝球合起来，平均装4盒，求每盒几个。", "20个红球不动，把16个蓝球平均装4盒，求一共有几个。"], correct: 0, explain: "括号表示两种球先合起来，然后全部平均装进 4 盒。", hint: "除以 4 的是括号里的整个总数。", wrongHints: ["", "这个故事应列成20＋16÷4，20没有参加平均分。"], steps: ["合并两种球：20＋16", "括号表示全部都要分", "平均装4盒：(20＋16)÷4"] }
+      ]
+    }
+  },
+  transfer: {
+    title: "两道题的想法一样吗？",
+    label: "变式发现任务",
+    levels: {
+      1: [
+        { compare: ["6 ＋ 6 ＋ 6", "3 × 6"], options: ["一样：都是3个6", "不一样：一个加一个乘"], correct: 0, explain: "3 个相同的 6 连加，可以写成 3 × 6，意思相同。", hint: "数一数第一道题里一共有几个 6。" },
+        { compare: ["4 × 5", "5 × 4"], options: ["结果一样，表示方法不同", "结果不一样"], correct: 0, explain: "两题结果都是 20；一题是 4 个 5，另一题是 5 个 4。", hint: "分别用乘法口诀算一算。" },
+        { compare: ["24 ÷ 4", "24 － 4"], options: ["不一样：平均分和拿走不同", "一样：都是去掉4"], correct: 0, explain: "除法是把 24 平均分成 4 份；减法只是从 24 中拿走 4。", hint: "一个是平均分，一个是总数变少。" }
+      ],
+      2: [
+        { compare: ["38 ＋ 20 ＋ 2", "38 ＋ 22"], options: ["一样：把22拆成20和2", "不一样：数的个数不同"], correct: 0, explain: "22 可以拆成 20 和 2，所以两道题的结果相同。", hint: "把右边的 22 拆一拆。" },
+        { compare: ["65 － 30 ＋ 1", "65 － 29"], options: ["一样：多减1再加回1", "不一样：一个有加法"], correct: 0, explain: "29 接近 30；先减 30 会多减 1，因此加回 1，结果相同。", hint: "比较 29 和 30，相差多少？" },
+        { compare: ["5 × 6 ＋ 4", "5 × (6 ＋ 4)"], options: ["不一样：4是否重复5次", "一样：都有5、6、4"], correct: 0, explain: "第一题只加一个 4；第二题括号里的 4 也要重复 5 次。", hint: "问一问：两道题中的 4 各出现了几次？" }
+      ],
+      3: [
+        { compare: ["8 × 4 － 4", "7 × 4"], options: ["一样：8个4拿走1个4", "不一样：一个有减法"], correct: 0, explain: "8 个 4 减去 1 个 4，正好还剩 7 个 4，所以结果相同。", hint: "把减去的 4 看成减去 1 个 4。" },
+        { compare: ["72 ÷ 8", "72 ÷ 9"], options: ["除数越大，每份越少", "除数越大，每份越多"], correct: 0, explain: "同样的 72 平均分，分成的份数越多，每一份就越少。", hint: "想象把同一盒糖分给 8 人和 9 人。" },
+        { compare: ["46 ＋ 19", "46 ＋ 20 － 1"], options: ["一样：先凑整再调整", "不一样：第二题多减了1"], correct: 0, explain: "把 19 看成 20－1，先加整十数再减 1，两题结果相同。", hint: "19 可以写成哪两个数的差？" }
+      ]
+    }
+  }
+};
+
+const gradeContent = {
+  2: {
+    questions: secondGradeQuestionSets,
+    welcomeEyebrow: "二年级 · 今日探险任务",
+    welcomeDescription: "先找数量之间的关系，再选择更聪明的算法。",
+    thought: "你发现规律了吗？",
+    levelNames: ["热身", "熟练", "思考"],
+    ruleLabel: "二年级思维小口诀",
+    rule: "先看数量关系，再选加减乘除；能凑整时，计算会更轻松。"
+  },
+  3: {
+    questions: questionSets,
+    welcomeEyebrow: "三年级 · 今日探险任务",
+    welcomeDescription: "别急着算答案，先找出藏在算式里的“小队”。",
+    thought: "先算哪一块？",
+    levelNames: ["基础", "混合", "挑战"],
+    ruleLabel: "三年级运算小口诀",
+    rule: "有括号先算括号；没有括号，先乘除、后加减；同一级，从左往右。"
+  }
+};
+
+const missionContent = {
+  2: {
+    order: ["找规律", "观察数与形怎样变化", "观察"],
+    calculate: ["聪明计算", "拆分、凑整再计算", "方法"],
+    story: ["情景推理", "找数量关系再列式", "理解"],
+    transfer: ["变式发现", "比较相同与不同", "进阶"]
+  },
+  3: {
+    order: ["找第一步", "圈出最先计算的部分", "入门"],
+    calculate: ["一步步算", "先找顺序，再算结果", "熟练"],
+    story: ["情景翻译", "算式和故事双向理解", "理解"],
+    transfer: ["变式挑战", "找出变化与不变", "进阶"]
+  }
+};
+
+const savedGrade = Number(localStorage.getItem("mathPlanetGrade"));
+
 const state = {
+  grade: savedGrade === 3 ? 3 : 2,
   mode: "order",
   level: 1,
   index: 0,
@@ -111,16 +246,24 @@ const state = {
   roundStartStars: 0,
   firstTryCorrect: 0,
   stars: Number(localStorage.getItem("mathPlanetStars")) || 0,
-  streak: Number(localStorage.getItem("mathPlanetStreak")) || 0,
-  sound: localStorage.getItem("mathPlanetSound") !== "off"
+  streak: Number(localStorage.getItem("mathPlanetStreak")) || 0
 };
 
 const elements = {
+  gradeControl: document.querySelector(".grade-control"),
   missionGrid: document.querySelector("#missionGrid"),
+  welcomeEyebrow: document.querySelector("#welcomeEyebrow"),
+  welcomeDescription: document.querySelector("#welcomeDescription"),
+  thoughtBubble: document.querySelector("#thoughtBubble"),
+  missionNote: document.querySelector("#missionNote"),
+  levelControl: document.querySelector(".level-control"),
+  ruleLabel: document.querySelector("#ruleLabel"),
+  ruleText: document.querySelector("#ruleText"),
   modeLabel: document.querySelector("#modeLabel"),
   practiceTitle: document.querySelector("#practiceTitle"),
   promptArea: document.querySelector("#promptArea"),
   translationLens: document.querySelector("#translationLens"),
+  solutionProcess: document.querySelector("#solutionProcess"),
   answerArea: document.querySelector("#answerArea"),
   feedback: document.querySelector("#feedback"),
   feedbackTitle: document.querySelector("#feedbackTitle"),
@@ -132,7 +275,6 @@ const elements = {
   progressFill: document.querySelector("#progressFill"),
   starCount: document.querySelector("#starCount"),
   streakCount: document.querySelector("#streakCount"),
-  soundButton: document.querySelector("#soundButton"),
   celebration: document.querySelector("#celebration"),
   practiceCard: document.querySelector("#practiceCard")
 };
@@ -150,25 +292,28 @@ function getQuestions() {
   return state.roundQuestions;
 }
 
+function activeQuestionSets() {
+  return gradeContent[state.grade].questions;
+}
+
 function currentQuestion() {
   return getQuestions()[state.index];
 }
 
 function startRound() {
-  state.roundQuestions = shuffle(questionSets[state.mode].levels[state.level]);
+  state.roundQuestions = shuffle(activeQuestionSets()[state.mode].levels[state.level]);
   state.index = 0;
   state.roundStartStars = state.stars;
   state.firstTryCorrect = 0;
 }
 
 function renderQuestion() {
-  const group = questionSets[state.mode];
+  const group = activeQuestionSets()[state.mode];
   const questions = getQuestions();
   const question = currentQuestion();
   state.answered = false;
   state.attempts = 0;
   state.usedHint = false;
-  stopSpeaking();
 
   elements.modeLabel.textContent = group.label;
   elements.practiceTitle.textContent = question.question || group.title;
@@ -177,6 +322,8 @@ function renderQuestion() {
   elements.feedback.className = "feedback";
   elements.feedbackTitle.textContent = "";
   elements.feedbackText.textContent = "";
+  elements.solutionProcess.hidden = true;
+  elements.solutionProcess.replaceChildren();
   elements.nextButton.disabled = true;
   elements.nextButtonLabel.textContent = "下一题";
   elements.hintButton.disabled = false;
@@ -230,13 +377,13 @@ function checkAnswer(index, button) {
     [...elements.answerArea.children].forEach((item) => { item.disabled = true; });
     const feedbackTitle = state.attempts === 0 ? `太棒了，获得 ${earned} 颗星！` : "找到了，就是这一块！";
     showFeedback("success", feedbackTitle, question.explain);
+    renderSolutionProcess(question);
     if (state.mode === "story") revealTranslationSteps(question, 3);
     elements.nextButton.disabled = false;
     if (state.index === getQuestions().length - 1) {
       elements.nextButtonLabel.textContent = "完成本轮";
     }
     elements.hintButton.disabled = true;
-    giveAudioFeedback("correct", `答对了。${question.explain}`);
     celebrate();
     elements.nextButton.focus({ preventScroll: true });
   } else {
@@ -249,10 +396,13 @@ function checkAnswer(index, button) {
     const storyHint = question.wrongHints?.[index] || question.hint;
     const retryText = state.mode === "story"
       ? storyHint
-      : state.attempts >= 2 ? question.hint : "先别急着计算答案，看看运算符和括号。";
+      : state.attempts >= 2
+        ? question.hint
+        : state.grade === 2
+          ? "先别急着算，看看数字之间的规律和数量关系。"
+          : "先别急着计算答案，看看运算符和括号。";
     showFeedback("try-again", "没关系，再观察一次", retryText);
     if (state.mode === "story") revealTranslationSteps(question, Math.min(state.attempts, 2));
-    giveAudioFeedback("wrong", `再观察一次。${retryText}`);
   }
 }
 
@@ -285,13 +435,267 @@ function revealTranslationSteps(question, count) {
   });
 }
 
+function appendTextElement(parent, tag, className, text) {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.textContent = text;
+  parent.appendChild(element);
+  return element;
+}
+
+function normalizeMathExpression(text) {
+  return String(text)
+    .replace(/[＋+]/g, "+")
+    .replace(/[－−]/g, "-")
+    .replace(/[×*]/g, "*")
+    .replace(/[÷/]/g, "/")
+    .replace(/\s+/g, "");
+}
+
+function parseMathExpression(text) {
+  const source = normalizeMathExpression(text);
+  const tokens = source.match(/\d+|[()+\-*/]/g);
+  if (!tokens || tokens.join("") !== source) return null;
+  let position = 0;
+
+  function primary() {
+    const token = tokens[position];
+    if (/^\d+$/.test(token || "")) {
+      position += 1;
+      return { value: Number(token) };
+    }
+    if (token === "(") {
+      position += 1;
+      const node = addition();
+      if (tokens[position] !== ")") throw new Error("括号不完整");
+      position += 1;
+      return node;
+    }
+    throw new Error("算式不完整");
+  }
+
+  function multiplication() {
+    let node = primary();
+    while (tokens[position] === "*" || tokens[position] === "/") {
+      const operator = tokens[position];
+      position += 1;
+      node = { operator, left: node, right: primary() };
+    }
+    return node;
+  }
+
+  function addition() {
+    let node = multiplication();
+    while (tokens[position] === "+" || tokens[position] === "-") {
+      const operator = tokens[position];
+      position += 1;
+      node = { operator, left: node, right: multiplication() };
+    }
+    return node;
+  }
+
+  try {
+    const tree = addition();
+    return position === tokens.length ? tree : null;
+  } catch (_) {
+    return null;
+  }
+}
+
+function formatMathNumber(value) {
+  return Number.isInteger(value) ? String(value) : String(Number(value.toFixed(2)));
+}
+
+function calculateTree(node, steps) {
+  if (Object.prototype.hasOwnProperty.call(node, "value")) return node.value;
+  const left = calculateTree(node.left, steps);
+  const right = calculateTree(node.right, steps);
+  const operations = {
+    "+": (a, b) => a + b,
+    "-": (a, b) => a - b,
+    "*": (a, b) => a * b,
+    "/": (a, b) => a / b
+  };
+  const symbols = { "+": "＋", "-": "－", "*": "×", "/": "÷" };
+  const result = operations[node.operator](left, right);
+  steps.push({
+    left,
+    right,
+    operator: node.operator,
+    result,
+    text: `${formatMathNumber(left)} ${symbols[node.operator]} ${formatMathNumber(right)} ＝ ${formatMathNumber(result)}`
+  });
+  return result;
+}
+
+function expressionOperations(expression) {
+  const tree = parseMathExpression(expression);
+  if (!tree) return [];
+  const steps = [];
+  calculateTree(tree, steps);
+  return steps;
+}
+
+function expressionSolution(expression) {
+  return expressionOperations(expression).map((step) => step.text);
+}
+
+function splitExplanation(text) {
+  return text.split(/[，；。]/).map((part) => part.trim()).filter(Boolean).slice(0, 4);
+}
+
+function solutionExpressions(question) {
+  if (question.compare) return question.compare;
+  if (question.scenario) return [question.scenario];
+  if (question.story) {
+    const correctOption = question.options[question.correct];
+    return parseMathExpression(correctOption) ? [correctOption] : [];
+  }
+  return parseMathExpression(question.prompt) ? [question.prompt] : [];
+}
+
+function operationFromText(text) {
+  const match = String(text).match(/(-?\d+(?:\.\d+)?)\s*([＋+－−×*÷/])\s*(-?\d+(?:\.\d+)?)\s*[＝=]\s*(-?\d+(?:\.\d+)?)/);
+  if (!match) return null;
+  const operatorMap = { "＋": "+", "+": "+", "－": "-", "−": "-", "×": "*", "*": "*", "÷": "/", "/": "/" };
+  return { left: Number(match[1]), operator: operatorMap[match[2]], right: Number(match[3]), result: Number(match[4]), text };
+}
+
+function appendBarSegment(bar, value, className = "") {
+  const segment = appendTextElement(bar, "span", `bar-segment${className ? ` ${className}` : ""}`, formatMathNumber(value));
+  segment.style.flexGrow = String(Math.max(Math.abs(value), 1));
+  return segment;
+}
+
+function renderOperationModel(parent, operation) {
+  if (!operation) return;
+  const model = appendTextElement(parent, "div", "math-model", "");
+  const { left, right, result } = operation;
+
+  if (operation.operator === "+") {
+    appendTextElement(model, "p", "model-caption", `${formatMathNumber(left)} 和 ${formatMathNumber(right)} 拼起来`);
+    const bar = appendTextElement(model, "div", "bar-model", "");
+    appendBarSegment(bar, left);
+    appendBarSegment(bar, right, "secondary");
+    appendTextElement(model, "div", "bar-total", `合起来是 ${formatMathNumber(result)}`);
+    return;
+  }
+
+  if (operation.operator === "-") {
+    appendTextElement(model, "p", "model-caption", `${formatMathNumber(left)} 分成“剩下”和“去掉”`);
+    const bar = appendTextElement(model, "div", "bar-model", "");
+    appendBarSegment(bar, Math.max(result, 0), "secondary");
+    appendBarSegment(bar, right, "removed").setAttribute("aria-label", `去掉 ${formatMathNumber(right)}`);
+    appendTextElement(model, "div", "bar-total", `剩下 ${formatMathNumber(result)}`);
+    return;
+  }
+
+  const isDivision = operation.operator === "/";
+  const groupCount = isDivision ? right : (right <= 10 ? right : left);
+  const groupValue = isDivision ? result : (right <= 10 ? left : right);
+  const visibleCount = Math.min(Math.max(Math.round(groupCount), 1), 8);
+  const caption = isDivision
+    ? `${formatMathNumber(left)} 平均分成 ${formatMathNumber(right)} 份，每份 ${formatMathNumber(result)}`
+    : `${formatMathNumber(groupCount)} 组，每组 ${formatMathNumber(groupValue)}`;
+  appendTextElement(model, "p", "model-caption", caption);
+  const groups = appendTextElement(model, "div", "group-model", "");
+  for (let index = 0; index < visibleCount; index += 1) {
+    appendTextElement(groups, "span", "group-block", formatMathNumber(groupValue));
+  }
+  if (groupCount > visibleCount) appendTextElement(groups, "span", "group-more", `… 共 ${formatMathNumber(groupCount)} 份`);
+  appendTextElement(model, "div", "bar-total", isDivision ? `每份是 ${formatMathNumber(result)}` : `一共是 ${formatMathNumber(result)}`);
+}
+
+function renderSequenceModel(parent, question) {
+  if (!question.prompt?.includes("，")) return;
+  const tokens = question.prompt.split("，").map((token) => token.trim());
+  const row = appendTextElement(parent, "div", "sequence-model", "");
+  tokens.forEach((token, index) => {
+    appendTextElement(row, "span", `sequence-number${token.includes("？") ? " unknown" : ""}`, token);
+    if (index >= tokens.length - 1) return;
+    const current = Number(token);
+    const next = Number(tokens[index + 1]);
+    let change = "继续";
+    if (Number.isFinite(current) && Number.isFinite(next)) {
+      if (/乘\s*2/.test(question.explain) && next === current * 2) change = "×2";
+      else change = next >= current ? `＋${next - current}` : `－${current - next}`;
+    } else {
+      const previous = Number(tokens[index - 1]);
+      if (Number.isFinite(previous) && Number.isFinite(current)) {
+        if (/乘\s*2.*减\s*1/.test(question.explain)) change = "－1";
+        else change = current >= previous ? `再＋${current - previous}` : `再－${previous - current}`;
+      }
+    }
+    appendTextElement(row, "span", "sequence-change", change);
+  });
+}
+
+function renderSymbolModel(parent, question) {
+  if (!/[△○□]/.test(question.prompt || "")) return;
+  const model = appendTextElement(parent, "div", "symbol-model", "");
+  appendTextElement(model, "span", "symbol-card", question.prompt);
+  appendTextElement(model, "span", "symbol-arrow", "→").setAttribute("aria-hidden", "true");
+  appendTextElement(model, "span", "symbol-card answer", question.options[question.correct]);
+}
+
+function createSolutionColumn(parent, title, expression, question) {
+  const column = appendTextElement(parent, "div", "solution-column", "");
+  if (title) appendTextElement(column, "p", "solution-column-title", title);
+  appendTextElement(column, "div", "solution-equation", expression);
+
+  const calculatedOperations = expressionOperations(expression);
+  const calculatedSteps = question.solution || calculatedOperations.map((step) => step.text);
+  const explanationEquations = splitExplanation(question.explain).filter((step) => step.includes("＝"));
+  const steps = !question.solution && explanationEquations.length >= calculatedSteps.length
+    ? explanationEquations
+    : calculatedSteps;
+  const usesCalculatedOperations = steps === calculatedSteps && !question.solution;
+  const list = appendTextElement(column, "ol", "solution-steps", "");
+  steps.forEach((step, index) => {
+    const item = appendTextElement(list, "li", "solution-step", "");
+    appendTextElement(item, "span", "solution-step-number", String(index + 1));
+    const body = appendTextElement(item, "div", "solution-step-body", "");
+    appendTextElement(body, "span", "solution-step-text", step);
+    renderOperationModel(body, operationFromText(step) || (usesCalculatedOperations ? calculatedOperations[index] : null));
+  });
+}
+
+function renderSolutionProcess(question) {
+  const container = elements.solutionProcess;
+  container.replaceChildren();
+  container.hidden = false;
+  const heading = appendTextElement(container, "div", "solution-heading", "");
+  appendTextElement(heading, "span", "", "✓");
+  appendTextElement(heading, "h3", "", "一步一步这样解");
+
+  const expressions = solutionExpressions(question);
+  if (expressions.length) {
+    const columns = appendTextElement(container, "div", expressions.length > 1 ? "solution-columns" : "", "");
+    expressions.forEach((expression, index) => {
+      const title = expressions.length > 1 ? (index === 0 ? "左边算式" : "右边算式") : (question.story ? "先列出算式" : "原算式");
+      createSolutionColumn(columns, title, expression, question);
+    });
+  } else {
+    renderSequenceModel(container, question);
+    renderSymbolModel(container, question);
+    const list = appendTextElement(container, "ol", "solution-steps", "");
+    const steps = question.solution || splitExplanation(question.explain);
+    steps.forEach((step, index) => {
+      const item = appendTextElement(list, "li", "solution-step", "");
+      appendTextElement(item, "span", "solution-step-number", String(index + 1));
+      const body = appendTextElement(item, "div", "solution-step-body", "");
+      appendTextElement(body, "span", "solution-step-text", step);
+    });
+  }
+  appendTextElement(container, "p", "solution-conclusion", `所以：${question.explain}`);
+}
+
 function showHint() {
   if (state.answered) return;
   const question = currentQuestion();
   state.usedHint = true;
   showFeedback("hint", "提示卡", question.hint);
   if (state.mode === "story") revealTranslationSteps(question, 2);
-  giveAudioFeedback("hint", `提示。${question.hint}`);
 }
 
 function nextQuestion() {
@@ -314,6 +718,7 @@ function renderCompletion() {
   elements.progressFill.style.width = "100%";
   elements.feedback.className = "feedback";
   elements.translationLens.hidden = true;
+  elements.solutionProcess.hidden = true;
   elements.promptArea.innerHTML = `
     <div class="round-summary" aria-label="本轮学习成绩">
       <div class="summary-item"><strong>${total}</strong><span>完成题目</span></div>
@@ -335,7 +740,6 @@ function renderCompletion() {
     elements.missionGrid.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "center" });
     document.querySelector(`.mission-card[data-mode="${state.mode}"]`).focus({ preventScroll: true });
   });
-  giveAudioFeedback("correct", `本轮完成。你完成了${total}道题，独立一次答对${state.firstTryCorrect}道，获得${earned}颗星。`);
   celebrate();
   elements.practiceTitle.focus({ preventScroll: true });
 }
@@ -357,6 +761,51 @@ function switchMode(mode) {
 function switchLevel(level) {
   state.level = Number(level);
   state.index = 0;
+  document.querySelectorAll(".level-button").forEach((button) => {
+    const active = Number(button.dataset.level) === state.level;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  startRound();
+  elements.answerArea.className = "answer-area";
+  renderQuestion();
+}
+
+function updateGradeContent() {
+  const content = gradeContent[state.grade];
+  elements.welcomeEyebrow.textContent = content.welcomeEyebrow;
+  elements.welcomeDescription.textContent = content.welcomeDescription;
+  elements.thoughtBubble.textContent = content.thought;
+  elements.missionNote.textContent = `${state.grade === 2 ? "二" : "三"}年级 · 每题都要说出“为什么”`;
+  elements.ruleLabel.textContent = content.ruleLabel;
+  elements.ruleText.textContent = content.rule;
+  elements.levelControl.setAttribute("aria-label", `${state.grade === 2 ? "二" : "三"}年级题目难度`);
+
+  document.querySelectorAll(".grade-button").forEach((button) => {
+    const active = Number(button.dataset.grade) === state.grade;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+
+  document.querySelectorAll(".level-button").forEach((button, index) => {
+    button.textContent = content.levelNames[index];
+  });
+
+  document.querySelectorAll(".mission-card").forEach((card) => {
+    const [title, description, badge] = missionContent[state.grade][card.dataset.mode];
+    card.querySelector(".mission-copy strong").textContent = title;
+    card.querySelector(".mission-copy small").textContent = description;
+    card.querySelector(".mission-badge").textContent = badge;
+  });
+}
+
+function switchGrade(grade) {
+  const nextGrade = Number(grade);
+  if (!gradeContent[nextGrade] || nextGrade === state.grade) return;
+  state.grade = nextGrade;
+  state.level = 1;
+  localStorage.setItem("mathPlanetGrade", String(state.grade));
+  updateGradeContent();
   document.querySelectorAll(".level-button").forEach((button) => {
     const active = Number(button.dataset.level) === state.level;
     button.classList.toggle("active", active);
@@ -395,157 +844,14 @@ function celebrate() {
   window.setTimeout(() => elements.celebration.replaceChildren(), 1200);
 }
 
-let audioContext;
-let speechRequestId = 0;
-let prerecordedAudio;
-
-function stopSpeaking() {
-  speechRequestId += 1;
-  if (prerecordedAudio) {
-    prerecordedAudio.pause();
-    prerecordedAudio.currentTime = 0;
-    prerecordedAudio = null;
-  }
-  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-}
-
-function integerToChinese(value) {
-  const number = Number(value);
-  if (!Number.isSafeInteger(number) || number < 0 || number > 9999) return String(value);
-  if (number === 0) return "零";
-  const digits = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
-  const units = ["", "十", "百", "千"];
-  const source = String(number);
-  let result = "";
-  let pendingZero = false;
-
-  [...source].forEach((character, index) => {
-    const digit = Number(character);
-    const unit = units[source.length - index - 1];
-    if (digit === 0) {
-      if (result && [...source.slice(index + 1)].some((item) => item !== "0")) pendingZero = true;
-      return;
-    }
-    if (pendingZero) {
-      result += "零";
-      pendingZero = false;
-    }
-    const omitOne = digit === 1 && unit === "十" && result === "";
-    result += `${omitOne ? "" : digits[digit]}${unit}`;
-  });
-  return result;
-}
-
-function speechFriendlyText(text) {
-  return text
-    // Pause after a complete expression before explanatory prose, while
-    // keeping number-and-measure-word phrases such as “8 张” connected.
-    .replace(/((?:\(?\d+\)?\s*[×*÷/＋+－\-=＝]\s*)+\(?\d+\)?)\s+(?![个只本张支颗块页天元人组份层盒包袋班次倍米厘米])(?=[\p{Script=Han}])/gu, "$1，")
-    .replace(/\d+/g, integerToChinese)
-    .replace(/[×*]/g, "，乘以，")
-    .replace(/[÷/]/g, "，除以，")
-    .replace(/[＝=]/g, "，等于，")
-    .replace(/[＋+]/g, "，加，")
-    .replace(/[－-]/g, "，减，")
-    .replaceAll("(", "，括号里，")
-    .replaceAll(")", "，括号结束，")
-    .replace(/\s*，\s*/g, "，")
-    .replace(/，{2,}/g, "，")
-    .replace(/\s+/g, "")
-    .trim();
-}
-
-function speechMarkup(text) {
-  const escaped = speechFriendlyText(text)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
-  return `<speak>${escaped
-    .replace(/([，；：])/g, '$1<break time="120ms"/>')
-    .replace(/([。！？])/g, '$1<break time="240ms"/>')}</speak>`;
-}
-
-function speak(text) {
-  if (!state.sound || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return false;
-
-  const requestId = ++speechRequestId;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(speechMarkup(text));
-  const voices = window.speechSynthesis.getVoices();
-  const chineseVoices = voices.filter((voice) => voice.lang.toLowerCase().startsWith("zh"));
-  const preferredVoice = chineseVoices.find((voice) => voice.localService && /zh[-_](cn|hans)/i.test(voice.lang))
-    || chineseVoices.find((voice) => voice.localService)
-    || chineseVoices[0];
-
-  utterance.lang = preferredVoice?.lang || "zh-CN";
-  if (preferredVoice) utterance.voice = preferredVoice;
-  utterance.rate = 0.92;
-  utterance.pitch = 1.02;
-  utterance.volume = 1;
-
-  // A short delay avoids an older WebKit issue where cancel() could also remove
-  // an utterance queued immediately after it.
-  window.setTimeout(() => {
-    if (requestId === speechRequestId && state.sound) window.speechSynthesis.speak(utterance);
-  }, 80);
-  return true;
-}
-
-function giveAudioFeedback(type, text) {
-  if (!state.sound) return;
-  if (playPrerecordedAudio(type, text)) return;
-  if (!speak(text)) playTone(type);
-}
-
-function playPrerecordedAudio(type, text) {
-  const source = window.ARITHMETIC_AUDIO?.[text];
-  if (!source) return false;
-
-  stopSpeaking();
-  const requestId = speechRequestId;
-  const audio = new Audio(source);
-  let fallbackStarted = false;
-  prerecordedAudio = audio;
-
-  const fallback = () => {
-    if (fallbackStarted || requestId !== speechRequestId || !state.sound) return;
-    fallbackStarted = true;
-    prerecordedAudio = null;
-    if (!speak(text)) playTone(type);
-  };
-
-  audio.addEventListener("ended", () => {
-    if (prerecordedAudio === audio) prerecordedAudio = null;
-  }, { once: true });
-  audio.addEventListener("error", fallback, { once: true });
-  audio.play().catch(fallback);
-  return true;
-}
-
-function playTone(type) {
-  if (!state.sound) return;
-  try {
-    audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-    const tones = { correct: [523, 659], wrong: [220], hint: [392] };
-    const notes = tones[type];
-    oscillator.type = type === "correct" ? "sine" : "triangle";
-    oscillator.frequency.setValueAtTime(notes[0], audioContext.currentTime);
-    if (notes[1]) oscillator.frequency.setValueAtTime(notes[1], audioContext.currentTime + 0.1);
-    gain.gain.setValueAtTime(0.07, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.22);
-    oscillator.connect(gain).connect(audioContext.destination);
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.23);
-  } catch (_) {
-    // Audio is an optional enhancement; the visual feedback remains complete.
-  }
-}
-
 elements.missionGrid.addEventListener("click", (event) => {
   const card = event.target.closest(".mission-card");
   if (card) switchMode(card.dataset.mode);
+});
+
+elements.gradeControl.addEventListener("click", (event) => {
+  const button = event.target.closest(".grade-button");
+  if (button) switchGrade(button.dataset.grade);
 });
 
 document.querySelectorAll(".level-button").forEach((button) => {
@@ -554,19 +860,7 @@ document.querySelectorAll(".level-button").forEach((button) => {
 
 elements.hintButton.addEventListener("click", showHint);
 elements.nextButton.addEventListener("click", nextQuestion);
-elements.soundButton.addEventListener("click", () => {
-  state.sound = !state.sound;
-  localStorage.setItem("mathPlanetSound", state.sound ? "on" : "off");
-  elements.soundButton.setAttribute("aria-pressed", String(state.sound));
-  elements.soundButton.setAttribute("aria-label", state.sound ? "关闭语音讲解" : "开启语音讲解");
-  elements.soundButton.title = state.sound ? "语音讲解已开启" : "语音讲解已关闭";
-  if (state.sound) giveAudioFeedback("hint", "语音讲解已开启");
-  else stopSpeaking();
-});
-
-elements.soundButton.setAttribute("aria-pressed", String(state.sound));
-elements.soundButton.setAttribute("aria-label", state.sound ? "关闭语音讲解" : "开启语音讲解");
-elements.soundButton.title = state.sound ? "语音讲解已开启" : "语音讲解已关闭";
+updateGradeContent();
 saveProgress();
 startRound();
 renderQuestion();

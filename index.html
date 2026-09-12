@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#fff8e7" />
     <meta
       name="description"
-      content="面向三年级孩子的混合运算互动练习，通过找顺序、拆步骤、读故事和做变式理解算式结构。"
+      content="面向小学二、三年级孩子的数学思维互动练习，通过找规律、拆步骤、读故事和做变式理解数量关系。"
     />
     <title>算术星球 · 看懂算式再计算</title>
     <link rel="stylesheet" href="styles.css" />
@@ -39,14 +39,6 @@
       </nav>
 
       <div class="top-actions">
-        <button class="icon-button" id="soundButton" type="button" aria-label="关闭语音讲解" aria-pressed="true" title="语音讲解已开启">
-          <svg class="sound-on" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M11 5 6 9H3v6h3l5 4V5Zm4.5 3.5a5 5 0 0 1 0 7M18 6a8 8 0 0 1 0 12" />
-          </svg>
-          <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M11 5 6 9H3v6h3l5 4V5Zm4 5 5 5m0-5-5 5" />
-          </svg>
-        </button>
         <div class="stat-chip" aria-label="获得的星星">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.9-5.4 2.9 1-6-4.4-4.3 6.1-.9L12 2.8Z" /></svg>
           <strong id="starCount">0</strong>
@@ -58,9 +50,9 @@
     <main id="main" class="app-shell">
       <section class="welcome-panel" aria-labelledby="welcomeTitle">
         <div class="welcome-copy">
-          <p class="eyebrow">今日探险任务</p>
+          <p class="eyebrow" id="welcomeEyebrow">二年级 · 今日探险任务</p>
           <h1 id="welcomeTitle">先看懂，再动笔！</h1>
-          <p>别急着算答案，先找出藏在算式里的“小队”。</p>
+          <p id="welcomeDescription">先找数量之间的关系，再选择更聪明的算法。</p>
           <div class="streak-pill">
             <span class="streak-flame" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M13.4 2.4c.8 3.6-.8 5.2-2.3 6.7-1.2-1.2-1.5-2.6-1.4-3.8C6.8 7.5 5 10.1 5 13a7 7 0 0 0 14 0c0-4.2-2.6-7.7-5.6-10.6ZM12 18.5a3.2 3.2 0 0 1-3.2-3.2c0-1.2.6-2.3 1.5-3.2.2 1 .8 1.8 1.6 2.3 1.1-1 1.6-2.1 1.5-3.6 1.2 1.1 1.8 2.6 1.8 4.5a3.2 3.2 0 0 1-3.2 3.2Z" /></svg>
@@ -70,7 +62,7 @@
         </div>
 
         <div class="mascot-wrap" aria-label="一只正在思考的星球小助手" role="img">
-          <div class="thought-bubble">先算哪一块？</div>
+          <div class="thought-bubble" id="thoughtBubble">你发现规律了吗？</div>
           <svg class="mascot" viewBox="0 0 230 190" aria-hidden="true">
             <ellipse cx="114" cy="168" rx="68" ry="12" fill="#5e54a4" opacity=".13" />
             <path d="M77 52c-9-17 0-32 10-39M153 52c9-17 0-32-10-39" fill="none" stroke="#302b63" stroke-width="7" stroke-linecap="round" />
@@ -90,13 +82,33 @@
         </div>
       </section>
 
+      <section class="grade-section" aria-labelledby="gradeTitle">
+        <div class="section-heading grade-heading">
+          <div>
+            <p class="eyebrow">选择学习年级</p>
+            <h2 id="gradeTitle">我要挑战哪一站？</h2>
+          </div>
+          <p class="section-note">每个年级都有 4 种思维训练</p>
+        </div>
+        <div class="grade-control" role="group" aria-label="选择学习年级">
+          <button class="grade-button active" type="button" data-grade="2" aria-pressed="true">
+            <span class="grade-number" aria-hidden="true">2</span>
+            <span><strong>二年级</strong><small>规律、凑整和两步问题</small></span>
+          </button>
+          <button class="grade-button" type="button" data-grade="3" aria-pressed="false">
+            <span class="grade-number" aria-hidden="true">3</span>
+            <span><strong>三年级</strong><small>乘除、括号和混合运算</small></span>
+          </button>
+        </div>
+      </section>
+
       <section class="mission-section" aria-labelledby="missionTitle">
         <div class="section-heading">
           <div>
             <p class="eyebrow">选择训练方式</p>
             <h2 id="missionTitle">今天从哪里出发？</h2>
           </div>
-          <p class="section-note">每题都要说出“为什么”</p>
+          <p class="section-note" id="missionNote">二年级 · 每题都要说出“为什么”</p>
         </div>
 
         <div class="mission-grid" id="missionGrid">
@@ -148,10 +160,10 @@
 
       <section class="practice-card" id="practiceCard" aria-labelledby="practiceTitle">
         <div class="practice-topline">
-          <div class="level-control" role="group" aria-label="题目难度">
-            <button type="button" class="level-button active" data-level="1" aria-pressed="true">基础</button>
-            <button type="button" class="level-button" data-level="2" aria-pressed="false">混合</button>
-            <button type="button" class="level-button" data-level="3" aria-pressed="false">挑战</button>
+          <div class="level-control" role="group" aria-label="二年级题目难度">
+            <button type="button" class="level-button active" data-level="1" aria-pressed="true">热身</button>
+            <button type="button" class="level-button" data-level="2" aria-pressed="false">熟练</button>
+            <button type="button" class="level-button" data-level="3" aria-pressed="false">思考</button>
           </div>
           <div class="question-progress" aria-label="本轮进度">
             <span id="questionNumber">第 1 题</span>
@@ -180,6 +192,8 @@
             </div>
           </div>
 
+          <section id="solutionProcess" class="solution-process" hidden aria-live="polite" aria-label="解题步骤"></section>
+
           <div class="practice-actions">
             <button class="hint-button" id="hintButton" type="button">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4m5-10a7 7 0 1 0-11 5.7V17h8v-.3A7 7 0 0 0 19 11Z" /></svg>
@@ -193,19 +207,18 @@
         </div>
       </section>
 
-      <section class="rule-strip" aria-label="运算顺序小口诀">
+      <section class="rule-strip" aria-label="数学思维小口诀">
         <div class="rule-icon" aria-hidden="true">
           <svg viewBox="0 0 32 32"><path d="M16 3 4 9v9c0 7 5 10 12 12 7-2 12-5 12-12V9L16 3Z" /><path d="m10 17 4 4 8-9" /></svg>
         </div>
         <div>
-          <p class="eyebrow">星球小口诀</p>
-          <strong>有括号先算括号；没有括号，先乘除、后加减；同一级，从左往右。</strong>
+          <p class="eyebrow" id="ruleLabel">二年级思维小口诀</p>
+          <strong id="ruleText">先看数量关系，再选加减乘除；能凑整时，计算会更轻松。</strong>
         </div>
       </section>
     </main>
 
     <div class="celebration" id="celebration" aria-hidden="true"></div>
-    <script src="audio-manifest.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
