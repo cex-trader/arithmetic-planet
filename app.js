@@ -264,6 +264,8 @@ const elements = {
   promptArea: document.querySelector("#promptArea"),
   translationLens: document.querySelector("#translationLens"),
   solutionProcess: document.querySelector("#solutionProcess"),
+  solutionToggle: document.querySelector("#solutionToggle"),
+  solutionToggleLabel: document.querySelector("#solutionToggleLabel"),
   answerArea: document.querySelector("#answerArea"),
   feedback: document.querySelector("#feedback"),
   feedbackTitle: document.querySelector("#feedbackTitle"),
@@ -323,8 +325,10 @@ function renderQuestion() {
   elements.feedbackTitle.textContent = "";
   elements.feedbackText.textContent = "";
   elements.solutionProcess.hidden = true;
-  elements.solutionProcess.open = false;
   elements.solutionProcess.replaceChildren();
+  elements.solutionToggle.hidden = true;
+  elements.solutionToggle.setAttribute("aria-expanded", "false");
+  elements.solutionToggleLabel.textContent = "查看解题过程";
   elements.nextButton.disabled = true;
   elements.nextButtonLabel.textContent = "下一题";
   elements.hintButton.disabled = false;
@@ -378,7 +382,7 @@ function checkAnswer(index, button) {
     [...elements.answerArea.children].forEach((item) => { item.disabled = true; });
     const feedbackTitle = state.attempts === 0 ? `太棒了，获得 ${earned} 颗星！` : "找到了，就是这一块！";
     showFeedback("success", feedbackTitle, question.explain);
-    renderSolutionProcess(question, state.attempts === 0);
+    renderSolutionProcess(question);
     if (state.mode === "story") revealTranslationSteps(question, 3);
     elements.nextButton.disabled = false;
     if (state.index === getQuestions().length - 1) {
@@ -661,27 +665,30 @@ function createSolutionColumn(parent, title, expression, question) {
   });
 }
 
-function renderSolutionProcess(question, collapsed = true) {
+function setSolutionExpanded(expanded) {
+  elements.solutionProcess.hidden = !expanded;
+  elements.solutionToggle.setAttribute("aria-expanded", String(expanded));
+  elements.solutionToggleLabel.textContent = expanded ? "收起解题过程" : "查看解题过程";
+}
+
+function renderSolutionProcess(question) {
   const container = elements.solutionProcess;
   container.replaceChildren();
-  container.hidden = false;
-  container.open = !collapsed;
-  const heading = appendTextElement(container, "summary", "solution-heading", "");
+  const heading = appendTextElement(container, "div", "solution-heading", "");
   appendTextElement(heading, "span", "", "✓");
   appendTextElement(heading, "h3", "", "一步一步这样解");
-  const content = appendTextElement(container, "div", "solution-content", "");
 
   const expressions = solutionExpressions(question);
   if (expressions.length) {
-    const columns = appendTextElement(content, "div", expressions.length > 1 ? "solution-columns" : "", "");
+    const columns = appendTextElement(container, "div", expressions.length > 1 ? "solution-columns" : "", "");
     expressions.forEach((expression, index) => {
       const title = expressions.length > 1 ? (index === 0 ? "左边算式" : "右边算式") : (question.story ? "先列出算式" : "原算式");
       createSolutionColumn(columns, title, expression, question);
     });
   } else {
-    renderSequenceModel(content, question);
-    renderSymbolModel(content, question);
-    const list = appendTextElement(content, "ol", "solution-steps", "");
+    renderSequenceModel(container, question);
+    renderSymbolModel(container, question);
+    const list = appendTextElement(container, "ol", "solution-steps", "");
     const steps = question.solution || splitExplanation(question.explain);
     steps.forEach((step, index) => {
       const item = appendTextElement(list, "li", "solution-step", "");
@@ -690,7 +697,13 @@ function renderSolutionProcess(question, collapsed = true) {
       appendTextElement(body, "span", "solution-step-text", step);
     });
   }
-  appendTextElement(content, "p", "solution-conclusion", `所以：${question.explain}`);
+  appendTextElement(container, "p", "solution-conclusion", `所以：${question.explain}`);
+  elements.solutionToggle.hidden = false;
+  setSolutionExpanded(false);
+}
+
+function toggleSolutionProcess() {
+  setSolutionExpanded(elements.solutionProcess.hidden);
 }
 
 function showHint() {
@@ -722,6 +735,7 @@ function renderCompletion() {
   elements.feedback.className = "feedback";
   elements.translationLens.hidden = true;
   elements.solutionProcess.hidden = true;
+  elements.solutionToggle.hidden = true;
   elements.promptArea.innerHTML = `
     <div class="round-summary" aria-label="本轮学习成绩">
       <div class="summary-item"><strong>${total}</strong><span>完成题目</span></div>
@@ -862,6 +876,7 @@ document.querySelectorAll(".level-button").forEach((button) => {
 });
 
 elements.hintButton.addEventListener("click", showHint);
+elements.solutionToggle.addEventListener("click", toggleSolutionProcess);
 elements.nextButton.addEventListener("click", nextQuestion);
 updateGradeContent();
 saveProgress();
