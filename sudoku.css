@@ -50,14 +50,15 @@
 .number-button:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-soft); transform: translateY(-2px); }
 .number-button:active:not(:disabled), .tool-button:active, .new-game-button:active { transform: translateY(3px); box-shadow: 0 1px 0 #c9c3dd; }
 .number-button:disabled { opacity: .38; cursor: not-allowed; }
-.tool-row { display: grid; grid-template-columns: 1fr 1.35fr; gap: 10px; }
+.game-controls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .tool-button, .new-game-button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 10px 12px; border: 2px solid #cbc5df; border-radius: 15px; background: #fff; box-shadow: 0 4px 0 #ddd8e8; font-size: 14px; font-weight: 900; transition: transform var(--fast), box-shadow var(--fast), background var(--fast); }
+.game-controls .tool-button { min-width: 0; min-height: 72px; flex-direction: column; gap: 4px; padding: 7px 4px; font-size: 13px; }
 .tool-button svg, .new-game-button svg { width: 20px; margin-right: 6px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.game-controls .tool-button svg { width: 22px; margin-right: 0; }
 .hint-tool { color: #815b10; border-color: #e2bd52; background: #fff8d7; box-shadow-color: #e1c66d; }
-.game-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.game-stats div { padding: 12px; border: 2px solid var(--line); border-radius: 15px; background: #faf9ff; }
-.game-stats span { display: block; color: var(--ink-soft); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 12px; }
-.game-stats strong { display: block; margin-top: 2px; font-size: 18px; font-variant-numeric: tabular-nums; }
+.game-stat { display: flex; min-width: 0; min-height: 72px; align-items: center; justify-content: center; flex-direction: column; padding: 7px 4px; border: 2px solid var(--line); border-radius: 15px; background: #faf9ff; text-align: center; }
+.game-stat span { color: var(--ink-soft); font-family: "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 11px; }
+.game-stat strong { margin-top: 2px; font-size: 16px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .new-game-button { width: 100%; color: #fff; border-color: var(--ink); background: var(--primary); box-shadow: 0 5px 0 var(--ink); }
 
 .complete-dialog { width: min(440px, calc(100% - 32px)); padding: 30px; border: 3px solid var(--ink); border-radius: 28px; color: var(--ink); background: #fffdf6; box-shadow: 0 12px 0 rgba(41,36,81,.2); text-align: center; }
@@ -79,7 +80,7 @@
   .game-panel { grid-template-columns: 1fr 1fr; }
   .number-pad { grid-template-columns: repeat(9, 1fr); grid-column: 1 / -1; }
   .number-button { min-width: 0; min-height: 54px; }
-  .tool-row, .game-stats { align-self: stretch; }
+  .game-controls { grid-column: 1 / -1; }
   .new-game-button { grid-column: 1 / -1; }
 }
 
@@ -109,7 +110,8 @@
   .number-pad { grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .number-button { min-height: 48px; border-radius: 12px; font-size: 21px; }
   .number-button small { display: block; }
-  .tool-row { grid-template-columns: 1fr 1.25fr; }
+  .game-controls { grid-column: auto; gap: 6px; }
+  .game-controls .tool-button, .game-stat { min-height: 68px; border-radius: 12px; }
 }
 
 @media (max-width: 390px) {

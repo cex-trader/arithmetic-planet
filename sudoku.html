@@ -7,7 +7,7 @@
     <meta name="description" content="适合小学三年级孩子的九宫格数独游戏，包含教学、容易、中等和困难模式。" />
     <title>数独探险 · 算术星球</title>
     <link rel="stylesheet" href="styles.css?v=ea8e82c30e" />
-    <link rel="stylesheet" href="sudoku.css?v=1a9bc81006" />
+    <link rel="stylesheet" href="sudoku.css?v=b676c79e2e" />
   </head>
   <body class="sudoku-page">
     <a class="skip-link" href="#sudokuMain">跳到数独练习</a>
@@ -93,20 +93,17 @@
           <aside class="game-panel" aria-label="数独操作和提示">
             <div class="number-pad" id="numberPad" aria-label="数字键盘"></div>
 
-            <div class="tool-row">
+            <div class="game-controls" role="group" aria-label="操作与当前进度">
               <button class="tool-button" id="eraseButton" type="button">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 15 8-9 8 7-7 8H8l-4-4a1.4 1.4 0 0 1 0-2Z" /><path d="m9 11 7 7" /></svg>
                 擦除
               </button>
-              <button class="tool-button hint-tool" id="sudokuHintButton" type="button">
+              <button class="tool-button hint-tool" id="sudokuHintButton" type="button" aria-label="填一格提示">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4m5-10a7 7 0 1 0-11 5.7V17h8v-.3A7 7 0 0 0 19 11Z" /></svg>
-                填一格提示
+                提示一格
               </button>
-            </div>
-
-            <div class="game-stats" aria-label="当前进度">
-              <div><span>已完成</span><strong id="filledCount">0 / 81</strong></div>
-              <div><span>使用提示</span><strong id="hintCount">0</strong></div>
+              <div class="game-stat"><span>已完成</span><strong id="filledCount">0 / 81</strong></div>
+              <div class="game-stat"><span>使用提示</span><strong id="hintCount">0</strong></div>
             </div>
 
             <button class="new-game-button" id="newGameButton" type="button">
