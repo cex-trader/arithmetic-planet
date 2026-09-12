@@ -1,0 +1,8 @@
+{
+  "name": "arithmetic-planet",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/version-assets.mjs",
+    "check": "node --check app.js && node --check sudoku.js"
+  }
+}
