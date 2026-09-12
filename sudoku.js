@@ -22,9 +22,6 @@ const state = {
 const elements = {
   board: document.querySelector("#sudokuBoard"),
   numberPad: document.querySelector("#numberPad"),
-  coachCard: document.querySelector("#coachCard"),
-  coachTitle: document.querySelector("#coachTitle"),
-  coachText: document.querySelector("#coachText"),
   filledCount: document.querySelector("#filledCount"),
   hintCount: document.querySelector("#hintCount"),
   starCount: document.querySelector("#starCount"),
@@ -172,7 +169,6 @@ function newGame(level = state.level) {
   saveGame();
   updateDifficultyButtons();
   render();
-  setCoach("先观察，再排除", level === "teaching" ? "教学模式会告诉你候选数字。先看选中格所在的行、列和小宫格。" : "选择一个空格，先排除同行、同列和小宫格中已经出现的数字。", "");
   announce(`已生成一道${difficultyConfig[level].label}数独`);
 }
 
@@ -247,32 +243,12 @@ function render() {
   elements.starCount.textContent = String(state.stars);
   elements.eraseButton.disabled = state.selected === null || state.fixed[state.selected] || !state.board[state.selected] || state.complete;
   elements.hintButton.disabled = state.complete;
-  if (state.selected !== null) updateCoachForSelection();
 }
 
 function selectCell(index) {
   state.selected = index;
   render();
   announce(elements.board.children[index].getAttribute("aria-label"));
-}
-
-function updateCoachForSelection() {
-  const index = state.selected;
-  const row = Math.floor(index / 9) + 1;
-  const column = index % 9 + 1;
-  if (state.fixed[index]) {
-    setCoach(`这是题目给的数字 ${state.board[index]}`, `它在第 ${row} 行、第 ${column} 列。点击相同数字，可以看看它们在棋盘上的位置。`, "");
-    return;
-  }
-  if (state.board[index]) {
-    setCoach(`这里填了 ${state.board[index]}`, "如果想重新思考，可以点击“擦除”。", "success");
-    return;
-  }
-  const candidates = candidatesFor(state.board, index);
-  const detail = state.level === "teaching"
-    ? `排除已经出现的数字后，这一格可能是：${candidates.join("、")}。`
-    : `这一格还有 ${candidates.length} 个可能。先在第 ${row} 行、第 ${column} 列和所在小宫格中逐个排除。`;
-  setCoach(`观察第 ${row} 行、第 ${column} 列`, detail, "");
 }
 
 function directConflict(index, number) {
@@ -294,7 +270,7 @@ function directConflict(index, number) {
 
 function placeNumber(number) {
   if (state.selected === null) {
-    setCoach("先选择空格", "点击棋盘里的一个空格，再选择要填的数字。", "warning");
+    announce("请先选择棋盘里的一个空格");
     return;
   }
   const index = state.selected;
@@ -310,7 +286,6 @@ function placeNumber(number) {
     const reason = conflict
       ? `${number} 已经出现在${conflict}里，所以不能填在这里。`
       : `${number} 暂时没有直接重复，但继续推理会走不通。换个数字试试。`;
-    setCoach("这个数字还不合适", reason, "warning");
     announce(reason);
     window.setTimeout(() => cell.classList.remove("wrong"), 320);
     saveGame();
@@ -320,7 +295,6 @@ function placeNumber(number) {
   state.board[index] = number;
   state.hinted[index] = false;
   saveGame();
-  setCoach("推理正确！", `${number} 放在这里不会和这一行、这一列、小宫格里的数字重复。`, "success");
   announce(`填写 ${number}，正确`);
   render();
   if (state.board.every(Boolean)) finishGame();
@@ -351,7 +325,6 @@ function useHint() {
   const column = index % 9 + 1;
   saveGame();
   render();
-  setCoach("提示放好啦", `第 ${row} 行、第 ${column} 列可以填 ${state.solution[index]}。看看它和周围数字的关系。`, "success");
   announce(`提示：第 ${row} 行第 ${column} 列填 ${state.solution[index]}`);
   if (state.board.every(Boolean)) finishGame();
 }
@@ -368,12 +341,6 @@ function finishGame() {
   elements.completeText.textContent = `完成${config.label}数独，使用 ${state.hints} 次提示，获得 ${reward} 颗星！`;
   elements.dialog.showModal();
   announce("恭喜完成数独挑战");
-}
-
-function setCoach(title, text, type) {
-  elements.coachTitle.textContent = title;
-  elements.coachText.textContent = text;
-  elements.coachCard.className = `coach-card${type ? ` ${type}` : ""}`;
 }
 
 function announce(text) {
@@ -437,5 +404,4 @@ if (!loadGame()) newGame("teaching");
 else {
   updateDifficultyButtons();
   render();
-  setCoach("继续上次的挑战", "你的进度已经保存好了。选择一个空格，继续推理吧。", "");
 }

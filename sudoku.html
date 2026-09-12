@@ -7,10 +7,10 @@
     <meta name="description" content="适合小学三年级孩子的九宫格数独游戏，包含教学、容易、中等和困难模式。" />
     <title>数独探险 · 算术星球</title>
     <link rel="stylesheet" href="styles.css?v=ea8e82c30e" />
-    <link rel="stylesheet" href="sudoku.css?v=604ff364bc" />
+    <link rel="stylesheet" href="sudoku.css?v=1a9bc81006" />
   </head>
   <body class="sudoku-page">
-    <a class="skip-link" href="#sudokuMain">跳到数独棋盘</a>
+    <a class="skip-link" href="#sudokuMain">跳到数独练习</a>
 
     <div class="sky" aria-hidden="true">
       <span class="star star-one"></span>
@@ -46,42 +46,35 @@
     </header>
 
     <main id="sudokuMain" class="sudoku-shell">
-      <section class="sudoku-hero" aria-labelledby="sudokuTitle">
-        <div>
-          <p class="eyebrow">逻辑推理训练</p>
-          <h1 id="sudokuTitle">九宫格数独探险</h1>
-          <p>不用计算加减法，只要认真观察、排除和推理。</p>
-        </div>
-        <div class="mini-grid" aria-hidden="true">
-          <span>5</span><span></span><span>8</span>
-          <span></span><span>3</span><span></span>
-          <span>2</span><span></span><span>6</span>
-        </div>
-      </section>
-
-      <section class="lesson-card" aria-labelledby="lessonTitle">
-        <div class="lesson-heading">
+      <details class="lesson-card">
+        <summary class="lesson-summary">
           <span class="lesson-icon" aria-hidden="true">
             <svg viewBox="0 0 32 32"><path d="M5 7.5c5-2 8-1 11 2v18c-3-3-6-4-11-2v-18Zm22 0c-5-2-8-1-11 2v18c3-3 6-4 11-2v-18Z" /></svg>
           </span>
-          <div>
-            <p class="eyebrow">一分钟学规则</p>
-            <h2 id="lessonTitle">每个数字都有三个约定</h2>
+          <span class="lesson-copy">
+            <span class="eyebrow">一分钟学规则</span>
+            <strong id="lessonTitle">每个数字都有三个约定</strong>
+          </span>
+          <span class="lesson-toggle" aria-hidden="true">
+            <span>查看</span>
+            <svg viewBox="0 0 24 24"><path d="m7 9 5 5 5-5" /></svg>
+          </span>
+        </summary>
+        <div class="lesson-content">
+          <div class="rule-grid">
+            <div><strong>看一行</strong><span>横着的每一行，1～9不能重复。</span></div>
+            <div><strong>看一列</strong><span>竖着的每一列，1～9不能重复。</span></div>
+            <div><strong>看小宫格</strong><span>每个粗线框里的九格，1～9不能重复。</span></div>
           </div>
+          <p class="lesson-tip"><strong>思考口诀：</strong>先找空格，再看行、列、小宫格，排除已经出现的数字。</p>
         </div>
-        <div class="rule-grid">
-          <div><strong>看一行</strong><span>横着的每一行，1～9不能重复。</span></div>
-          <div><strong>看一列</strong><span>竖着的每一列，1～9不能重复。</span></div>
-          <div><strong>看小宫格</strong><span>每个粗线框里的九格，1～9不能重复。</span></div>
-        </div>
-        <p class="lesson-tip"><strong>思考口诀：</strong>先找空格，再看行、列、小宫格，排除已经出现的数字。</p>
-      </section>
+      </details>
 
       <section class="sudoku-game" aria-labelledby="gameTitle">
         <div class="game-toolbar">
           <div>
             <p class="eyebrow">选择难度</p>
-            <h2 id="gameTitle">开始今天的数独</h2>
+            <h1 id="gameTitle">开始今天的数独</h1>
           </div>
           <div class="difficulty-tabs" role="group" aria-label="数独难度">
             <button class="difficulty-button active" type="button" data-level="teaching" aria-pressed="true">教学</button>
@@ -98,17 +91,6 @@
           </div>
 
           <aside class="game-panel" aria-label="数独操作和提示">
-            <div class="coach-card" id="coachCard">
-              <div class="coach-head">
-                <span class="coach-mark" aria-hidden="true">?</span>
-                <div>
-                  <p class="eyebrow">推理小助手</p>
-                  <strong id="coachTitle">先选一个空格</strong>
-                </div>
-              </div>
-              <p id="coachText">点击棋盘上的空格，我会陪你一起观察。</p>
-            </div>
-
             <div class="number-pad" id="numberPad" aria-label="数字键盘"></div>
 
             <div class="tool-row">
@@ -150,6 +132,6 @@
       </div>
     </dialog>
 
-    <script src="sudoku.js?v=05d70ee923"></script>
+    <script src="sudoku.js?v=a39fb2f2c3"></script>
   </body>
 </html>
