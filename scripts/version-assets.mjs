@@ -5,6 +5,7 @@ import path from "node:path";
 const projectRoot = path.resolve(import.meta.dirname, "..");
 const pages = {
   "index.html": ["styles.css", "app.js"],
+  "make24.html": ["styles.css", "make24.css", "make24.js"],
   "sudoku.html": ["styles.css", "sudoku.css", "sudoku.js"]
 };
 

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#fff8e7" />
+    <meta name="description" content="适合小学生的24点游戏，从全部可解的1到10四牌组合中随机出题，并展示所有不同解法。" />
+    <title>24点挑战 · 算术星球</title>
+    <link rel="stylesheet" href="styles.css?v=ea8e82c30e" />
+    <link rel="stylesheet" href="make24.css?v=9a29308326" />
+  </head>
+  <body class="make24-page">
+    <a class="skip-link" href="#make24Main">跳到24点游戏</a>
+
+    <div class="sky" aria-hidden="true">
+      <span class="star star-one"></span>
+      <span class="star star-two"></span>
+      <span class="star star-three"></span>
+      <span class="orbit-dot"></span>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="算术星球首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <circle cx="32" cy="31" r="18" fill="#7767e9" />
+            <path d="M14 29c-8 4-11 9-8 13 5 7 28 3 43-5 9-5 12-10 9-13-2-3-7-3-13-1" fill="none" stroke="#ffb934" stroke-width="6" stroke-linecap="round" />
+            <circle cx="25" cy="25" r="3" fill="#bdb5ff" />
+          </svg>
+        </span>
+        <span>算术星球</span>
+      </a>
+
+      <nav class="page-nav" aria-label="学习项目">
+        <a class="page-nav-link" href="index.html">算术</a>
+        <a class="page-nav-link active" href="make24.html" aria-current="page">24点</a>
+        <a class="page-nav-link" href="sudoku.html">数独</a>
+      </nav>
+
+      <div class="top-actions">
+        <div class="stat-chip" aria-label="获得的星星">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.9-5.4 2.9 1-6-4.4-4.3 6.1-.9L12 2.8Z" /></svg>
+          <strong id="starCount">0</strong>
+        </div>
+        <div class="avatar" aria-label="学习者头像">小</div>
+      </div>
+    </header>
+
+    <main id="make24Main" class="make24-shell">
+      <section class="make24-intro" aria-labelledby="make24Title">
+        <div>
+          <p class="eyebrow">四张牌 · 一个目标</p>
+          <h1 id="make24Title">想办法得到 24</h1>
+          <p class="make24-lead">每张牌都要用一次，可以使用 ＋、－、×、÷ 和括号。</p>
+        </div>
+        <div class="bank-stat" aria-label="题库信息">
+          <span>完整可解题库</span>
+          <strong id="bankCount">正在准备…</strong>
+          <small>1～10 点，允许重复</small>
+        </div>
+      </section>
+
+      <section class="make24-game" aria-labelledby="challengeTitle" aria-busy="true">
+        <div class="challenge-heading">
+          <div>
+            <p class="eyebrow" id="challengeLabel">第 1 次挑战</p>
+            <h2 id="challengeTitle" tabindex="-1">这四张牌怎样算出 24？</h2>
+          </div>
+          <div class="target-badge" aria-label="目标数字24"><span>目标</span><strong>24</strong></div>
+        </div>
+
+        <div class="playing-cards" id="playingCards" aria-label="本题的四张数字牌">
+          <div class="number-card card-loading" aria-hidden="true"></div>
+          <div class="number-card card-loading" aria-hidden="true"></div>
+          <div class="number-card card-loading" aria-hidden="true"></div>
+          <div class="number-card card-loading" aria-hidden="true"></div>
+        </div>
+
+        <p class="thinking-tip" id="thinkingTip">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6m-5 3h4m5-10a7 7 0 1 0-11 5.7V17h8v-.3A7 7 0 0 0 19 11Z" /></svg>
+          先找能凑成 6、8、12 的两个数，也许会更快。
+        </p>
+
+        <div class="make24-actions">
+          <button class="reveal-button" id="revealButton" type="button" aria-controls="solutions" aria-expanded="false" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" /><circle cx="12" cy="12" r="2.7" /></svg>
+            <span>查看全部答案</span>
+          </button>
+          <button class="next-puzzle-button" id="nextPuzzleButton" type="button" disabled>
+            换一组牌
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5" /><path d="M6.1 9A7 7 0 0 1 18 6l2 3M17.9 15A7 7 0 0 1 6 18l-2-3" /></svg>
+          </button>
+        </div>
+
+        <section class="solutions" id="solutions" aria-labelledby="solutionsTitle" hidden>
+          <div class="solutions-heading">
+            <div>
+              <p class="eyebrow">答案揭晓</p>
+              <h3 id="solutionsTitle">这道题共有 <span id="solutionCount">0</span> 种不同解法</h3>
+            </div>
+            <span class="all-used-badge">每张牌恰好用一次</span>
+          </div>
+          <ol class="solution-list" id="solutionList"></ol>
+          <p class="solution-note">只交换顺序或结合位置的等价算式合并为一种；不同的运算路径都会列出来。</p>
+        </section>
+
+        <div class="sr-only" id="gameAnnouncement" aria-live="polite"></div>
+      </section>
+
+      <section class="make24-rules" aria-labelledby="rulesTitle">
+        <div class="rules-title">
+          <span aria-hidden="true">24</span>
+          <div><p class="eyebrow">游戏规则</p><h2 id="rulesTitle">四步检查法</h2></div>
+        </div>
+        <div class="make24-rule-grid">
+          <div><strong>四张都用</strong><span>不能少用，也不能多用。</span></div>
+          <div><strong>每张一次</strong><span>相同数字也代表不同的牌。</span></div>
+          <div><strong>四则运算</strong><span>可以加、减、乘、除和加括号。</span></div>
+          <div><strong>结果是 24</strong><span>中间可以出现分数。</span></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="make24.js?v=9bb12227b0"></script>
+  </body>
+</html>
