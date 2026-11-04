@@ -429,12 +429,12 @@ button:focus-visible, a:focus-visible {
 
 @media (max-width: 680px) {
   .topbar, .app-shell { width: min(100% - 24px, 1120px); }
-  .topbar { min-height: 70px; }
+  .topbar { min-height: 70px; flex-wrap: wrap; gap: 10px; padding: 12px 0; }
   .brand { font-size: 18px; }
   .brand span:last-child { display: none; }
   .brand-mark { width: 39px; height: 39px; }
   .avatar { display: none; }
-  .page-nav { gap: 3px; padding: 4px; }
+  .page-nav { order: 3; width: 100%; justify-content: center; gap: 3px; padding: 4px; }
   .page-nav-link { min-width: 54px; min-height: 44px; padding: 7px 10px; }
   .stat-chip { height: 46px; min-width: 46px; border-radius: 14px; }
   .grade-control { grid-template-columns: 1fr; gap: 12px; }

@@ -1,4 +1,6 @@
 .DS_Store
+.preview-*.png
+.preview-*.txt
 
 # Local preview clips that are not referenced by the generated manifest.
 assets/audio/sample-correct.mp3

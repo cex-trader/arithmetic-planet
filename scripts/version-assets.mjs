@@ -4,7 +4,9 @@ import path from "node:path";
 
 const projectRoot = path.resolve(import.meta.dirname, "..");
 const pages = {
-  "index.html": ["styles.css", "app.js"],
+  "index.html": ["learning.css", "learning.js"],
+  "math.html": ["styles.css", "app.js"],
+  "story.html": ["learning.css", "story-data.js", "story.js"],
   "make24.html": ["styles.css", "make24.css", "make24.js"],
   "sudoku.html": ["styles.css", "sudoku.css", "sudoku.js"]
 };
