@@ -6,6 +6,7 @@ const projectRoot = path.resolve(import.meta.dirname, "..");
 const pages = {
   "index.html": ["learning.css", "learning.js"],
   "math.html": ["styles.css", "app.js"],
+  "describe.html": ["learning.css", "describe.css", "describe-data.js", "describe.js"],
   "story.html": ["learning.css", "story-data.js", "story.js"],
   "make24.html": ["styles.css", "make24.css", "make24.js"],
   "sudoku.html": ["styles.css", "sudoku.css", "sudoku.js"]
