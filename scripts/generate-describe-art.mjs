@@ -20,6 +20,7 @@ const art={
  leaf:['绿色叶片和尖尖的叶尖','<path d="M62 178Q50 66 235 35q15 154-173 143" fill="#8db889"/><path d="m62 178 153-122M107 142l-13-42m13 42 50 7m-18-33-3-39m3 39 51 2" fill="none" stroke="#4b7f59"/>'],
  bread:['一个烤成金黄色的面包','<path d="M64 168v-40q-28-56 18-69 27-45 68-22 42-23 69 22 47 13 18 69v40q-87 39-173 0" fill="#dbaf70"/><path d="M87 158v-34q-24-43 16-52 19-33 47-14 28-19 47 14 40 9 16 52v34q-63 25-126 0" fill="#f1d2a0"/><path d="m112 85 9 21m24-30 8 24m24-17 9 20" stroke="#c29a61" stroke-width="7"/>'],
 };
+art['bird-pair']=['树枝上两只面对面的蓝色小鸟', `<g transform="translate(145 38) scale(-.55 .55)">${art.bird[1]}</g><g transform="translate(155 38) scale(.55 .55)">${art.bird[1]}</g><path d="M26 176h248" fill="none"/>`];
 for(const name of ['happy','angry','surprised','sad','worried']) art[name]=[({happy:'眉眼弯弯、嘴角上扬的笑脸',angry:'眉毛向中间压低、抿着嘴的表情',surprised:'睁大眼睛、张开嘴的表情',sad:'皱着眉头、眼里有泪水的表情',worried:'眉头皱起、额边有汗的表情'})[name],face(name)];
 for(const [name,[title,body]] of Object.entries(art)) fs.writeFileSync(path.join(dir,name+'.svg'),`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 220"><title>${title}</title><rect x="4" y="4" width="292" height="212" rx="24" fill="#f4efdf"/><ellipse cx="150" cy="197" rx="105" ry="9" fill="#e1d9c7"/><g ${stroke}>${body}</g></svg>`);
 console.log(`Generated ${Object.keys(art).length} original illustrations`);
