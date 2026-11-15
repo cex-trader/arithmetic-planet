@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "test:make24": "node scripts/test-make24.cjs",
+    "test:compare": "node scripts/test-compare.cjs",
     "build": "node scripts/version-assets.mjs",
-    "check": "node --check app.js && node --check make24.js && node --check sudoku.js && node --check learning.js && node --check story-data.js && node --check story.js && node --check describe-data.js && node --check describe.js && node --check describe-paragraphs.js"
+    "check": "node --check app.js && node --check make24.js && node --check sudoku.js && node --check learning.js && node --check story-data.js && node --check story.js && node --check describe-data.js && node --check describe.js && node --check describe-paragraphs.js && node --check compare-data.js && node --check compare.js && node --check site-nav.js && node --check scripts/site-navigation.mjs"
   }
 }
