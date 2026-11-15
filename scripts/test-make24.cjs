@@ -6,6 +6,7 @@ const nodes = new Map();
 function element(selector) {
   if (!nodes.has(selector)) nodes.set(selector, {
     textContent: '', hidden: true, disabled: true, attributes: {}, listeners: {},
+    toggleAttribute(name, force) { this[name] = force; },
     setAttribute(name, value) { this.attributes[name] = value; },
     addEventListener(name, callback) { this.listeners[name] = callback; },
     replaceChildren() {}, appendChild() {}, querySelector() { return element('expression'); },
@@ -94,23 +95,32 @@ assert.equal(run('possibleMerges(leaf(1), leaf(5)).some(node => node.value.numer
 
 run('initialize()');
 assert.equal(run('state.bank.length'), solvable);
-const next = element('#nextPuzzleButton');
-const reveal = element('#revealButton');
-assert.equal(next.disabled, true);
-assert.equal(reveal.disabled, false);
+const action = element('#puzzleActionButton');
+const label = element('#puzzleActionLabel');
+assert.equal(action.disabled, false);
+assert.equal(label.textContent, '查看答案');
 const firstKey = run('state.lastKey');
-next.listeners.click();
-assert.equal(run('state.challenge'), 1, 'Cannot skip the answer through the handler');
-reveal.listeners.click();
+action.listeners.click({ detail: 1 });
+assert.equal(run('state.challenge'), 1, 'First click reveals without changing the puzzle');
+assert.equal(run('state.lastKey'), firstKey);
 assert.equal(element('#solutions').hidden, false);
-assert.equal(next.disabled, false);
-reveal.listeners.click();
-assert.equal(element('#solutions').hidden, true);
-assert.equal(next.disabled, false, 'Collapsing answers keeps next question unlocked');
-next.listeners.click();
+assert.equal(label.textContent, '下一题');
+assert.equal(element('#revealIcon').hidden, true);
+assert.equal(element('#nextIcon').hidden, false);
+action.listeners.click({ detail: 2 });
+assert.equal(run('state.challenge'), 1, 'Double click must not skip the revealed answer');
+assert.equal(element('#solutions').hidden, false);
+action.listeners.click({ detail: 1 });
 assert.equal(run('state.challenge'), 2);
 assert.notEqual(run('state.lastKey'), firstKey);
 assert.equal(element('#solutions').hidden, true);
-assert.equal(reveal.attributes['aria-expanded'], 'false');
-assert.equal(next.disabled, true, 'New question requires its own answer reveal');
-console.log(`${combinations} combinations, ${solvable} solvable puzzles, ${totalAnswers} displayed answers: correct results, all cards used once, no negative intermediates; reveal/next flow passed.`);
+assert.equal(label.textContent, '查看答案');
+assert.equal(element('#revealIcon').hidden, false);
+assert.equal(element('#nextIcon').hidden, true);
+action.listeners.click({ detail: 0 });
+assert.equal(run('state.challenge'), 2, 'Keyboard activation reveals the current answer');
+assert.equal(element('#solutions').hidden, false);
+action.listeners.click({ detail: 0 });
+assert.equal(run('state.challenge'), 3, 'Keyboard activation advances after reveal');
+assert.equal(element('#solutions').hidden, true);
+console.log(`${combinations} combinations, ${solvable} solvable puzzles, ${totalAnswers} displayed answers: correct results, all cards used once, no negative intermediates; single-button reveal/next flow passed.`);

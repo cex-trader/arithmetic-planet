@@ -7,7 +7,7 @@
     <meta name="description" content="适合小学生的24点游戏，从全部可解的1到10四牌组合中随机出题，并展示所有不同解法。" />
     <title>24点挑战 · 算术星球</title>
     <link rel="stylesheet" href="styles.css?v=73dda913a2" />
-    <link rel="stylesheet" href="make24.css?v=69052a8f0e" />
+    <link rel="stylesheet" href="make24.css?v=ae607c2562" />
   </head>
   <body class="make24-page">
     <a class="skip-link" href="#make24Main">跳到24点游戏</a>
@@ -84,16 +84,13 @@
         </p>
 
         <div class="make24-actions">
-          <button class="reveal-button" id="revealButton" type="button" aria-controls="solutions" aria-expanded="false" disabled>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" /><circle cx="12" cy="12" r="2.7" /></svg>
-            <span>查看全部答案</span>
-          </button>
-          <button class="next-puzzle-button" id="nextPuzzleButton" type="button" aria-describedby="nextPuzzleHint" disabled>
-            下一题
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5" /><path d="M6.1 9A7 7 0 0 1 18 6l2 3M17.9 15A7 7 0 0 1 6 18l-2-3" /></svg>
+          <button class="reveal-button" id="puzzleActionButton" type="button" aria-describedby="puzzleActionHint" disabled>
+            <svg id="revealIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" /><circle cx="12" cy="12" r="2.7" /></svg>
+            <svg id="nextIcon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            <span id="puzzleActionLabel">查看答案</span>
           </button>
         </div>
-        <p class="next-puzzle-hint" id="nextPuzzleHint" aria-live="polite">先查看本题答案，再挑战下一题。</p>
+        <p class="puzzle-action-hint" id="puzzleActionHint" aria-live="polite">先想一想，查看答案后再挑战下一题。</p>
 
         <section class="solutions" id="solutions" aria-labelledby="solutionsTitle" hidden>
           <div class="solutions-heading">
@@ -124,6 +121,6 @@
       </section>
     </main>
 
-    <script src="make24.js?v=2aa814b090"></script>
+    <script src="make24.js?v=f186a2e4ec"></script>
   </body>
 </html>

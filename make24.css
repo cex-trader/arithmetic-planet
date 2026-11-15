@@ -151,13 +151,13 @@
 
 .make24-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  max-width: 620px;
+  grid-template-columns: 1fr;
+  max-width: 340px;
   margin: 0 auto;
 }
 
 .make24-actions button {
+  scroll-margin-top: 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -173,11 +173,10 @@
 .make24-actions button:hover { transform: translateY(-2px); }
 .make24-actions button:active { transform: translateY(3px); box-shadow: none; }
 .make24-actions button:disabled { border-color: #b8b3c7; color: #736d86; background: #dedbe5; box-shadow: 0 4px 0 #b8b3c7; cursor: not-allowed; transform: none; }
-.next-puzzle-hint { margin: 16px 0 0; color: var(--ink-soft); font-size: 14px; font-weight: 700; text-align: center; }
+.puzzle-action-hint { margin: 16px 0 0; color: var(--ink-soft); font-size: 14px; font-weight: 700; text-align: center; }
 .reveal-button { color: #fff; background: var(--primary); box-shadow: 0 5px 0 var(--ink); }
 .reveal-button:hover { background: var(--primary-dark); }
-.next-puzzle-button { background: #fff; box-shadow: 0 5px 0 #d9d4e9; }
-.next-puzzle-button:hover { background: var(--primary-soft); }
+.make24-actions svg[hidden] { display: none; }
 
 .solutions {
   margin-top: 34px;

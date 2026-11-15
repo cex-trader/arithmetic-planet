@@ -16,10 +16,11 @@ const elements = {
   cards: document.querySelector("#playingCards"),
   label: document.querySelector("#challengeLabel"),
   title: document.querySelector("#challengeTitle"),
-  revealButton: document.querySelector("#revealButton"),
-  revealLabel: document.querySelector("#revealButton span"),
-  nextButton: document.querySelector("#nextPuzzleButton"),
-  nextHint: document.querySelector("#nextPuzzleHint"),
+  actionButton: document.querySelector("#puzzleActionButton"),
+  actionLabel: document.querySelector("#puzzleActionLabel"),
+  revealIcon: document.querySelector("#revealIcon"),
+  nextIcon: document.querySelector("#nextIcon"),
+  actionHint: document.querySelector("#puzzleActionHint"),
   solutions: document.querySelector("#solutions"),
   solutionCount: document.querySelector("#solutionCount"),
   solutionList: document.querySelector("#solutionList"),
@@ -250,8 +251,9 @@ function renderSolutions(solutions) {
 
 function hideSolutions() {
   elements.solutions.hidden = true;
-  elements.revealButton.setAttribute("aria-expanded", "false");
-  elements.revealLabel.textContent = "查看全部答案";
+  elements.actionLabel.textContent = "查看答案";
+  elements.revealIcon.toggleAttribute("hidden", false);
+  elements.nextIcon.toggleAttribute("hidden", true);
 }
 
 function newPuzzle() {
@@ -260,8 +262,7 @@ function newPuzzle() {
   while (state.bank.length > 1 && next.key === state.lastKey);
   state.puzzle = { ...next, solutions: solveCards(next.cards) };
   state.answerViewed = false;
-  elements.nextButton.disabled = true;
-  elements.nextHint.textContent = "先查看本题答案，再挑战下一题。";
+  elements.actionHint.textContent = "先想一想，查看答案后再挑战下一题。";
   state.lastKey = next.key;
   state.challenge += 1;
   elements.label.textContent = `第 ${state.challenge} 次挑战`;
@@ -272,19 +273,14 @@ function newPuzzle() {
 }
 
 function revealSolutions() {
-  const willShow = elements.solutions.hidden;
-  elements.solutions.hidden = !willShow;
-  elements.revealButton.setAttribute("aria-expanded", String(willShow));
-  elements.revealLabel.textContent = willShow ? "收起全部答案" : "查看全部答案";
-  if (willShow) {
-    state.answerViewed = true;
-    elements.nextButton.disabled = false;
-    elements.nextHint.textContent = "答案已查看，可以挑战下一题了。";
-    announce(`已显示全部 ${state.puzzle.solutions.length} 种解法`);
-    elements.solutions.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
-  } else {
-    announce("已收起答案");
-  }
+  state.answerViewed = true;
+  elements.solutions.hidden = false;
+  elements.actionLabel.textContent = "下一题";
+  elements.revealIcon.toggleAttribute("hidden", true);
+  elements.nextIcon.toggleAttribute("hidden", false);
+  elements.actionHint.textContent = "对照答案想一想，准备好后点击下一题。";
+  announce(`已显示全部 ${state.puzzle.solutions.length} 种解法，准备好后可点击下一题`);
+  elements.actionButton.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
 }
 
 function initialize() {
@@ -292,15 +288,20 @@ function initialize() {
   state.bank = buildQuestionBank();
   elements.bankCount.textContent = `${state.bank.length} 组题`;
   elements.game.setAttribute("aria-busy", "false");
-  elements.revealButton.disabled = false;
+  elements.actionButton.disabled = false;
   newPuzzle();
 }
 
-elements.revealButton.addEventListener("click", revealSolutions);
-elements.nextButton.addEventListener("click", () => {
-  if (!state.answerViewed) return;
+elements.actionButton.addEventListener("click", (event) => {
+  // A double click should reveal the answer without immediately skipping it.
+  if (event.detail > 1) return;
+  if (!state.answerViewed) {
+    revealSolutions();
+    return;
+  }
   newPuzzle();
   elements.title.focus({ preventScroll: true });
+  elements.title.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
 });
 
 window.requestAnimationFrame(() => window.setTimeout(initialize, 0));
