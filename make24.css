@@ -172,7 +172,8 @@
 .make24-actions svg { width: 23px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .make24-actions button:hover { transform: translateY(-2px); }
 .make24-actions button:active { transform: translateY(3px); box-shadow: none; }
-.make24-actions button:disabled { border-color: #b8b3c7; color: #736d86; background: #dedbe5; box-shadow: 0 4px 0 #b8b3c7; cursor: wait; }
+.make24-actions button:disabled { border-color: #b8b3c7; color: #736d86; background: #dedbe5; box-shadow: 0 4px 0 #b8b3c7; cursor: not-allowed; transform: none; }
+.next-puzzle-hint { margin: 16px 0 0; color: var(--ink-soft); font-size: 14px; font-weight: 700; text-align: center; }
 .reveal-button { color: #fff; background: var(--primary); box-shadow: 0 5px 0 var(--ink); }
 .reveal-button:hover { background: var(--primary-dark); }
 .next-puzzle-button { background: #fff; box-shadow: 0 5px 0 #d9d4e9; }

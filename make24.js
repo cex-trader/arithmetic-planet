@@ -6,6 +6,7 @@ const state = {
   bank: [],
   puzzle: null,
   challenge: 0,
+  answerViewed: false,
   stars: Number(localStorage.getItem("mathPlanetStars")) || 0,
   lastKey: ""
 };
@@ -18,6 +19,7 @@ const elements = {
   revealButton: document.querySelector("#revealButton"),
   revealLabel: document.querySelector("#revealButton span"),
   nextButton: document.querySelector("#nextPuzzleButton"),
+  nextHint: document.querySelector("#nextPuzzleHint"),
   solutions: document.querySelector("#solutions"),
   solutionCount: document.querySelector("#solutionCount"),
   solutionList: document.querySelector("#solutionList"),
@@ -90,6 +92,8 @@ function formatExpression(node, parentOp = "", position = 0) {
   const needsParentheses = parentOp && (
     childPrecedence < parentPrecedence
     || (position > 0 && (parentOp === "-" || parentOp === "/") && childPrecedence === parentPrecedence)
+    || (parentOp === "+" && node.op === "-")
+    || (parentOp === "*" && node.op === "/")
   );
   if (needsParentheses) text = `(${text})`;
   return text;
@@ -129,7 +133,10 @@ function possibleMerges(left, right) {
   if (right.value.numerator !== 0) results.push(operation("/", left, right));
   if (left.value.numerator !== 0) results.push(operation("/", right, left));
   const unique = new Map();
-  results.forEach((result) => unique.set(result.key, result));
+  // Both the question bank and displayed answers use nonnegative intermediate values.
+  results.forEach((result) => {
+    if (result.value.numerator >= 0) unique.set(result.key, result);
+  });
   return [...unique.values()];
 }
 
@@ -252,6 +259,9 @@ function newPuzzle() {
   do next = state.bank[Math.floor(Math.random() * state.bank.length)];
   while (state.bank.length > 1 && next.key === state.lastKey);
   state.puzzle = { ...next, solutions: solveCards(next.cards) };
+  state.answerViewed = false;
+  elements.nextButton.disabled = true;
+  elements.nextHint.textContent = "先查看本题答案，再挑战下一题。";
   state.lastKey = next.key;
   state.challenge += 1;
   elements.label.textContent = `第 ${state.challenge} 次挑战`;
@@ -267,6 +277,9 @@ function revealSolutions() {
   elements.revealButton.setAttribute("aria-expanded", String(willShow));
   elements.revealLabel.textContent = willShow ? "收起全部答案" : "查看全部答案";
   if (willShow) {
+    state.answerViewed = true;
+    elements.nextButton.disabled = false;
+    elements.nextHint.textContent = "答案已查看，可以挑战下一题了。";
     announce(`已显示全部 ${state.puzzle.solutions.length} 种解法`);
     elements.solutions.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
   } else {
@@ -280,12 +293,12 @@ function initialize() {
   elements.bankCount.textContent = `${state.bank.length} 组题`;
   elements.game.setAttribute("aria-busy", "false");
   elements.revealButton.disabled = false;
-  elements.nextButton.disabled = false;
   newPuzzle();
 }
 
 elements.revealButton.addEventListener("click", revealSolutions);
 elements.nextButton.addEventListener("click", () => {
+  if (!state.answerViewed) return;
   newPuzzle();
   elements.title.focus({ preventScroll: true });
 });

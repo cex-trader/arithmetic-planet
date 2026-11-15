@@ -7,7 +7,7 @@
     <meta name="description" content="适合小学生的24点游戏，从全部可解的1到10四牌组合中随机出题，并展示所有不同解法。" />
     <title>24点挑战 · 算术星球</title>
     <link rel="stylesheet" href="styles.css?v=73dda913a2" />
-    <link rel="stylesheet" href="make24.css?v=dc2989fe57" />
+    <link rel="stylesheet" href="make24.css?v=69052a8f0e" />
   </head>
   <body class="make24-page">
     <a class="skip-link" href="#make24Main">跳到24点游戏</a>
@@ -88,11 +88,12 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" /><circle cx="12" cy="12" r="2.7" /></svg>
             <span>查看全部答案</span>
           </button>
-          <button class="next-puzzle-button" id="nextPuzzleButton" type="button" disabled>
-            换一组牌
+          <button class="next-puzzle-button" id="nextPuzzleButton" type="button" aria-describedby="nextPuzzleHint" disabled>
+            下一题
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5" /><path d="M6.1 9A7 7 0 0 1 18 6l2 3M17.9 15A7 7 0 0 1 6 18l-2-3" /></svg>
           </button>
         </div>
+        <p class="next-puzzle-hint" id="nextPuzzleHint" aria-live="polite">先查看本题答案，再挑战下一题。</p>
 
         <section class="solutions" id="solutions" aria-labelledby="solutionsTitle" hidden>
           <div class="solutions-heading">
@@ -103,7 +104,7 @@
             <span class="all-used-badge">每张牌恰好用一次</span>
           </div>
           <ol class="solution-list" id="solutionList"></ol>
-          <p class="solution-note">只交换顺序或结合位置的等价算式合并为一种；不同的运算路径都会列出来。</p>
+          <p class="solution-note">只列出中间结果不含负数的解法；只交换顺序或结合位置的等价算式合并为一种。</p>
         </section>
 
         <div class="sr-only" id="gameAnnouncement" aria-live="polite"></div>
@@ -118,11 +119,11 @@
           <div><strong>四张都用</strong><span>不能少用，也不能多用。</span></div>
           <div><strong>每张一次</strong><span>相同数字也代表不同的牌。</span></div>
           <div><strong>四则运算</strong><span>可以加、减、乘、除和加括号。</span></div>
-          <div><strong>结果是 24</strong><span>中间可以出现分数。</span></div>
+          <div><strong>结果是 24</strong><span>中间可以出现分数，不出现负数。</span></div>
         </div>
       </section>
     </main>
 
-    <script src="make24.js?v=9bb12227b0"></script>
+    <script src="make24.js?v=2aa814b090"></script>
   </body>
 </html>
